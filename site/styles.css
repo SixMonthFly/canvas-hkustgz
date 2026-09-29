@@ -7,3 +7,23 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.motion .reveal{opacity:1;transform:none}}
 
 @media(max-width:580px){dialog{overflow:auto}dialog .dialog-heading{position:sticky;top:0;left:0;z-index:2}#large-demo{width:960px;min-height:680px}.hero h1{font-size:clamp(40px,12.5vw,49px)}}
+
+/* The same platform choice controls both download buttons and the guide. */
+.platform-choice{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.platform-caption{font-size:10px;color:#a6b8cf;white-space:nowrap}
+.platform-switch{display:inline-flex;gap:3px;padding:3px;border:1px solid #ffffff29;border-radius:9px;background:#02112742}
+.platform-switch button{min-height:36px;padding:7px 14px;border:0;border-radius:6px;background:transparent;color:#a8bdd5;font-size:11px;line-height:1.4;white-space:nowrap;transition:color .2s,background .2s,box-shadow .2s}
+.platform-switch button:hover{color:#fff;background:#ffffff0a}
+.platform-switch button[aria-pressed="true"]{color:#ffe3a1;background:#ffffff14;box-shadow:inset 0 0 0 1px #f1cf7929,0 2px 5px #0002}
+.hero-platform-choice{margin-top:26px}
+.hero-actions{margin-top:16px;flex-wrap:wrap}
+.panel-platform-choice{justify-content:space-between;margin-bottom:23px;padding-bottom:20px;border-bottom:1px solid #ffffff15;gap:10px}
+.button-gold>[data-download-label],.nav-download>[data-download-nav]{margin-left:0}
+.button[aria-disabled="true"]{opacity:.64;cursor:not-allowed;box-shadow:none}
+.button[aria-disabled="true"]:hover{transform:none;box-shadow:none}
+.install-steps [data-install-description],#install-compatibility{white-space:pre-line}
+.checksum code{white-space:pre-wrap}
+.package-line{gap:12px;flex-wrap:wrap}
+@media(max-width:1100px){.platform-switch button{padding-inline:12px}.platform-caption{font-size:9px}}
+@media(max-width:800px){.hero-platform-choice{justify-content:center}.panel-platform-choice{justify-content:flex-start;gap:10px}.platform-switch button{padding-inline:11px;font-size:10px}.hero-platform-choice .platform-switch button{padding-inline:17px;font-size:11px}}
+@media(max-width:580px){.hero-platform-choice{margin-top:25px;gap:10px}.hero-actions{margin-top:15px}.panel-platform-choice{justify-content:space-between;padding-bottom:18px;margin-bottom:22px}.platform-switch button{min-height:38px;padding-inline:12px}.download-app>div{min-width:0}.download-app>div>span{line-height:1.6}}
