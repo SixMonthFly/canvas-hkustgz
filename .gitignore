@@ -1,0 +1,4 @@
+*.dmg
+*.zip
+.env*
+__pycache__/

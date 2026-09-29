@@ -1,0 +1,16 @@
+/* Presentation-only additions; the product layout and theme are copied as-is. */
+html, body { min-width: 720px; }
+.demo-label {
+  position: fixed;
+  z-index: 20;
+  bottom: 10px;
+  right: 14px;
+  padding: 5px 9px;
+  border: 1px solid rgba(94, 111, 140, .2);
+  border-radius: 5px;
+  background: rgba(247, 249, 253, .94);
+  color: #53617b;
+  font: 10px/1.4 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  pointer-events: none;
+}
+#toast { max-width: min(540px, calc(100vw - 40px)); white-space: normal; text-align: center; }

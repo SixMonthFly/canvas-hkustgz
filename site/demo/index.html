@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; form-action 'none'; base-uri 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Canvas 课程管理 · 界面演示</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body data-theme="hkust">
+  <!-- 顶栏元素在 Claude 皮肤下由 arrangeChrome() 挪进侧边栏,其它皮肤保持原位 -->
+  <header>
+    <h1 id="app-title">📚 Canvas 课程管理</h1>
+    <span id="synced-at" class="synced"></span>
+    <button id="ai-settings-btn" title="设置(智能服务 / 外观)">⚙ 设置</button>
+    <button id="refresh-btn" class="primary"><svg class="sync-svg" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.2 6.4A5.3 5.3 0 0 0 3.3 5M2.8 9.6a5.3 5.3 0 0 0 9.9 1.4" /><path d="M3.1 2.4v2.9H6M12.9 13.6v-2.9H10" /></svg><span class="sync-label">同步</span></button>
+  </header>
+  <div id="sync-progress" class="hidden" role="status" aria-live="polite">
+    <div class="sync-progress-heading">
+      <span id="sync-progress-title">正在连接 Canvas…</span>
+      <span id="sync-progress-count"></span>
+    </div>
+    <div id="sync-progress-track" class="sync-progress-track" role="progressbar" aria-label="课程同步进度" aria-valuemin="0" aria-valuemax="100">
+      <div id="sync-progress-fill" class="sync-progress-fill indeterminate"></div>
+    </div>
+    <div id="sync-progress-detail"></div>
+  </div>
+  <div id="app">
+    <nav id="course-nav">
+      <div id="nav-head" class="only-claude">
+        <div id="nav-brand"></div>
+        <div id="nav-sync"></div>
+      </div>
+      <div class="nav-label only-claude">课程</div>
+      <div id="nav-items"></div>
+      <div id="update-footer">
+        <span id="update-status">📦 v-</span>
+        <button id="update-check-btn" title="检查新版本">🚀 检查更新</button>
+      </div>
+    </nav>
+    <div id="update-panel" class="hidden">
+      <div class="update-panel-head">
+        <span>发现新版本</span>
+        <button id="update-panel-close">✕</button>
+      </div>
+      <div id="update-progress-box" class="hidden">
+        <div class="prog-line" id="update-stage"></div>
+        <div class="prog-detail" id="update-detail"></div>
+        <div class="prog-bar"><div class="prog-fill" id="update-fill"></div></div>
+      </div>
+      <div id="update-new-box" class="hidden">
+        <div id="update-notes" class="update-notes"></div>
+        <div class="modal-actions" style="padding:8px 0 0">
+          <button id="update-later-btn">以后再说</button>
+          <button id="update-now-btn" class="primary">⬇ 立即更新</button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <!-- 看板舞台:全部课程 = 一块固定看板(下一项截止 + 30 天月历);
+           具体课程 = 作业/公告/课件/结构分析四块看板,总览平铺,单击后一大三小(台前调度) -->
+      <div id="stage" data-mode="home">
+        <div id="home-view" class="hidden"></div>
+        <div id="stage-strip-head">
+          <button id="stage-overview-btn" title="回到四块看板总览(Esc)"><svg class="grid-svg" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1.2" /><rect x="9" y="2" width="5" height="5" rx="1.2" /><rect x="2" y="9" width="5" height="5" rx="1.2" /><rect x="9" y="9" width="5" height="5" rx="1.2" /></svg><span>总览</span></button>
+        </div>
+        <section class="board" data-board="assignments" aria-labelledby="board-title-assignments">
+          <div class="board-head">
+            <button class="board-title" id="board-title-assignments" data-section="assignments">作业</button>
+            <span class="board-meta" id="board-meta-assignments"></span>
+          </div>
+          <div class="board-frame"><div class="board-surface">
+            <div id="sub-filters">
+              <button class="chip active" data-filter="pending">待办</button>
+              <button class="chip" data-filter="overdue">已过期</button>
+              <button class="chip" data-filter="done">已完成</button>
+              <button class="chip" data-filter="all">全部</button>
+            </div>
+            <div id="content">
+              <div id="assignment-list"></div>
+              <div id="detail-panel" class="hidden" role="region" aria-labelledby="detail-title">
+                <div class="detail-header">
+                  <span id="detail-title"></span>
+                  <button id="detail-close" aria-label="关闭作业详情">✕</button>
+                </div>
+                <div id="detail-meta"></div>
+                <div class="detail-actions">
+                  <button id="detail-open">🌐 打开原页</button>
+                  <button id="detail-interpret" class="primary">✨ AI 解读</button>
+                  <button id="detail-plan-btn" class="primary">📋 生成作业方案</button>
+                </div>
+                <div id="detail-desc" class="detail-desc"></div>
+                <div id="detail-interpretation" class="detail-translation hidden"></div>
+                <div id="detail-plan" class="detail-translation plan hidden"></div>
+              </div>
+            </div>
+          </div></div>
+        </section>
+        <section class="board" data-board="announcements" aria-labelledby="board-title-announcements">
+          <div class="board-head">
+            <button class="board-title" id="board-title-announcements" data-section="announcements">公告</button>
+            <span class="board-meta" id="board-meta-announcements"></span>
+          </div>
+          <div class="board-frame"><div class="board-surface">
+            <div id="ann-view">
+              <div id="ann-list"></div>
+            </div>
+          </div></div>
+        </section>
+        <section class="board" data-board="files" aria-labelledby="board-title-files">
+          <div class="board-head">
+            <button class="board-title" id="board-title-files" data-section="files">课件</button>
+            <span class="board-meta" id="board-meta-files"></span>
+          </div>
+          <div class="board-frame"><div class="board-surface">
+            <div id="files-view">
+              <div class="files-toolbar">
+                <span id="files-hint" class="synced"></span>
+                <button id="download-all-btn" class="primary">⬇ 全部下载</button>
+              </div>
+              <div id="files-list"></div>
+            </div>
+          </div></div>
+        </section>
+        <section class="board" data-board="analysis" aria-labelledby="board-title-analysis">
+          <div class="board-head">
+            <button class="board-title" id="board-title-analysis" data-section="analysis">课程结构分析</button>
+            <span class="board-meta" id="board-meta-analysis"></span>
+          </div>
+          <div class="board-frame"><div class="board-surface">
+            <div id="analysis-view">
+              <div class="analysis-toolbar">
+                <span id="analysis-course-name"></span>
+                <button id="analysis-cancel" class="hidden">取消</button>
+                <button id="analysis-start" class="primary">▶ 开始分析</button>
+                <span id="analysis-cost-hint" class="synced"></span>
+              </div>
+              <div id="analysis-progress" class="hidden"></div>
+              <div id="analysis-result"></div>
+            </div>
+          </div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-body">
+      <h2>⚙ 设置</h2>
+      <div class="ai-status">
+        <span id="ai-status-model">🤖 未配置模型</span>
+        <div id="effort-seg" class="seg hidden" title="AI 思考档位:影响所有 AI 功能的速度与深度">
+          <button data-effort="fast">⚡ 快速</button>
+          <button data-effort="balanced">⚖️ 均衡</button>
+          <button data-effort="deep">🎯 深度</button>
+        </div>
+      </div>
+      <label>外观
+        <select id="theme-select" title="切换皮肤">
+          <option value="default">🌙 深色</option>
+          <option value="chatgpt">💬 ChatGPT</option>
+          <option value="claude">🟠 Claude</option>
+          <option value="hkust">🎓 HKUST</option>
+        </select>
+      </label>
+      <label>AI 服务商
+        <select id="ai-provider"></select>
+      </label>
+      <label id="ai-baseurl-row">API 地址(Base URL)<input id="ai-baseurl" placeholder="https://.../v1"></label>
+      <label>模型(预设服务商仅支持指定多模态模型)
+        <input id="ai-model" placeholder="选择预设后自动填入">
+      </label>
+      <label>API Key<input id="ai-key" type="password" placeholder="sk-..."></label>
+      <button id="ai-key-link" class="linklike hidden">↗ 前往官网获取 / 购买 API Key</button>
+      <p class="hint">预设服务商只需填 API Key,模型与接口地址自动配置。Key 只存本地,不会上传。</p>
+      <div class="privacy-box">
+        <div class="privacy-head">
+          <span>🔒 隐私与诊断(纯本地)</span>
+          <label class="switch-like"><input type="checkbox" id="telemetry-toggle" checked> 记录诊断日志</label>
+        </div>
+        <p class="privacy-text">
+          应用会把匿名诊断信息记录在<b>本机的 data/telemetry.jsonl</b>,用于排查同步失败、课件下载失败等问题。
+          <b>绝不会自动上传任何数据。</b>记录内容:随机安装 ID(与个人身份无关)、应用版本、系统与硬件(操作系统/CPU/内存)、
+          功能事件(同步与下载的成败、错误码、文件大小、AI 服务商与模型名、功能使用次数——课程只记数量,不记名称)。
+          <b>不记录:</b>姓名、学号、API Key、作业与课程内容。
+        </p>
+        <div class="privacy-actions">
+          <button id="telemetry-export-btn">📤 导出诊断数据(发给我即可帮忙排查)</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="ai-test-btn">测试连接</button>
+        <span style="flex:1"></span>
+        <button id="ai-cancel-btn">取消</button>
+        <button id="ai-save-btn" class="primary">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden"></div>
+  <div class="demo-label" role="note">界面演示 · 虚构课程数据</div>
+  <script src="demo-bridge.js"></script>
+  <script src="vendor/marked.umd.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
