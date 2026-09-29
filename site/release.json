@@ -18,15 +18,14 @@
       "sha256": "911caf1bb2cd4dca1ef823897a3cbf5c375a40d6e2e005ef82553e4a57cf8f56"
     },
     "windows": {
-      "version": "0.3.6",
-      "tag": "v0.3.6",
-      "filename": "CanvasManager-Setup-0.3.6-x64.exe",
-      "size": 122045135,
-      "sha256": "081d848d294d62a9ab111f0a5ed7450535fe67363c21188a3194a1eaa214a0cd",
-      "sourceRelease": "https://gitee.com/xxouyang123/hkustgz_diy_canvas/releases/tag/v0.3.6",
-      "sourceChecksum": "https://gitee.com/xxouyang123/hkustgz_diy_canvas/releases/download/v0.3.6/v0.3.6-sha256.txt",
+      "version": "0.3.7",
+      "tag": "v0.3.7",
+      "filename": "CanvasManager-Setup-0.3.7-x64.exe",
+      "size": 122153645,
+      "sha256": "f309735c603db258e9d3afebd14a3c1245b99b3334cdeee0a760d7b33cd6be76",
+      "sourceRelease": "https://github.com/SixMonthFly/canvas-hkustgz/releases/tag/v0.3.7",
       "available": false,
-      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v0.3.6/CanvasManager-Setup-0.3.6-x64.exe"
+      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v0.3.7/CanvasManager-Setup-0.3.7-x64.exe"
     }
   }
 }
