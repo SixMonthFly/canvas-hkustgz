@@ -17,9 +17,9 @@
 
 Release 发布事件按版本标签检查环境规则，例如 `v0.3.6`；工作流中的 `checkout ref: main` 只控制读取的源码，并不改变该事件的标签身份。缺少 Tag `v*` 规则时，自动部署会提示标签不允许部署到 `github-pages`。规则保存后可重新运行失败任务，也可从 Actions 手动选择 `main` 运行 `Publish website`。
 
-下载元数据采用 `schemaVersion: 2`，`packages.mac` 和 `packages.windows` 各自保存版本、标签、文件名、大小、SHA-256、URL 与 `available` 状态。某个平台缺少附件或未通过核对时，仅禁用该平台下载，不影响另一平台。不要把 DMG 或 EXE 提交到 Git 源码仓库。
+下载元数据采用 `schemaVersion: 2`，`packages.mac` 和 `packages.windows` 各自保存版本、标签、文件名、大小、SHA-256、URL 与 `available` 状态。某个平台缺少附件、大小不符或缺少摘要时，仅禁用该平台下载，不影响另一平台。SHA-256 或下载 URL 与审核信息冲突时中止新部署，保留上一次可信网站。不要把 DMG 或 EXE 提交到 Git 源码仓库。
 
-如果已公开 Release 后才补传附件，在 Actions → Publish website → Run workflow 中选择 `main`，手动运行一次。补传 Windows EXE 到现有 v0.3.6 Release 后也必须执行此步骤；补传附件不会自动触发网站发布。
+如果已公开 Release 后才补传附件，在 Actions → Publish website → Run workflow 中选择 `main`，手动运行一次。补传附件不会自动触发网站发布；也可以在上传后推送网站更新，由 main 分支更新触发部署。
 
 当前 Mac 安装包使用本地签名，尚未完成 Apple Developer ID 签名与公证。网页提供首次打开说明。
 
