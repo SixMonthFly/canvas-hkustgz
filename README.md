@@ -7,9 +7,11 @@
 ## 发布
 
 1. 将本目录上传到自己的 GitHub 仓库的 `main` 分支。
-2. 在仓库 Settings → Pages 中，将 Source 设为 GitHub Actions。
+2. 在仓库 Settings → Pages 中，将 Source 设为 GitHub Actions；随后在 Settings → Environments → `github-pages` → Deployment branches and tags 中选择 Selected branches and tags，保留或添加类型为 Branch 的 `main` 规则，再添加类型为 Tag 的 `v*` 规则。两种类型须分别配置。如果 fork 后 Actions 尚未启用，先在 Actions 页面启用。
 3. 创建与 `site/release.json` 中版本一致的 draft Release，先上传对应 Apple Silicon DMG，确认上传完整后再公开 Release。
 4. 工作流核对安装包名称、大小与可用的 SHA-256 信息，然后发布 `main` 分支上的最新网站。
+
+Release 发布事件按版本标签检查环境规则，例如 `v0.3.6`；工作流中的 `checkout ref: main` 只控制读取的源码，并不改变该事件的标签身份。缺少 Tag `v*` 规则时，自动部署会提示标签不允许部署到 `github-pages`。规则保存后可重新运行失败任务，也可从 Actions 手动选择 `main` 运行 `Publish website`。
 
 未找到安装包时，下载按钮会明确提示尚未发布。不要把 DMG 提交到 Git 源码仓库。
 
