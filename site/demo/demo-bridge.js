@@ -7,6 +7,12 @@
   'use strict';
 
   const params = new URLSearchParams(location.search);
+  const storyMode = params.get('story') === '1';
+  const storySteps = new Set(['sync', 'home', 'overview', 'assignments', 'announcements', 'files', 'analysis']);
+  let rendererReady = false;
+  let pendingStoryStep = 'sync';
+  let storyRevision = 0;
+  if (storyMode) document.documentElement.dataset.storyMode = 'true';
   const requestedTheme = params.get('theme');
   window.demoTheme = ['hkust', 'claude', 'chatgpt', 'default'].includes(requestedTheme)
     ? requestedTheme : 'hkust';
@@ -167,7 +173,87 @@
   document.addEventListener('click', interceptAction, true);
   document.addEventListener('keydown', interceptAction, true);
 
+  // The website can direct this one presentation iframe through the real
+  // renderer's controls. The ordinary, clickable demo does not use this API.
+  function tellParent(type, step) {
+    if (window.parent === window) return;
+    window.parent.postMessage({ type, ...(step ? { step } : {}) }, location.origin);
+  }
+
+  function ensureStorySync() {
+    let overlay = document.querySelector('#story-sync');
+    if (overlay) return overlay;
+    overlay = document.createElement('div');
+    overlay.id = 'story-sync';
+    overlay.className = 'story-sync hidden';
+    overlay.setAttribute('role', 'status');
+    overlay.innerHTML = `
+      <div class="story-sync-card">
+        <div class="story-sync-caption"><span class="story-sync-dot"></span> 同步过程演示</div>
+        <div class="story-sync-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 5 11v12c0 8 15 14 15 14s15-6 15-14V11L20 4Z"/><path d="m13 20 5 5 10-11"/></svg></div>
+        <h2>登录一次，课程就到齐了。</h2>
+        <p>在应用中完成学校账号登录，<br>课程、作业和资料会一起同步。</p>
+        <div class="story-sync-login"><span class="story-sync-check" aria-hidden="true">✓</span><span>学校账号登录完成</span><span class="story-sync-state">演示</span></div>
+        <div class="story-sync-progress"><span>正在整理课程资料</span><span>5 门课程</span></div>
+        <div class="story-sync-track" aria-hidden="true"><span></span></div>
+        <small>虚构课程数据 · 此处无需登录</small>
+      </div>`;
+    document.body.appendChild(overlay);
+    return overlay;
+  }
+
+  function resetStoryScroll() {
+    for (const element of document.querySelectorAll('main, #stage, #home-view, .board-surface, #assignment-list, #detail-desc, #ann-list, #files-list, #analysis-result')) {
+      element.scrollTop = 0;
+      element.scrollLeft = 0;
+    }
+  }
+
+  function applyStoryStep(step) {
+    if (!storyMode || !rendererReady || !storySteps.has(step)) return;
+    const revision = ++storyRevision;
+    // Return via the all-courses view so changing direction produces exactly
+    // the same layout, filter and detail state as visiting a scene first time.
+    document.querySelector('.ann-row.expanded .ann-head')?.click();
+    document.querySelector('[data-filter="pending"]')?.click();
+    document.querySelector('[data-course="all"]')?.click();
+    document.querySelector('#toast')?.classList.add('hidden');
+    if (!['sync', 'home'].includes(step)) {
+      document.querySelector('[data-course="1"]')?.click();
+      document.querySelector('#stage-overview-btn')?.click();
+      if (step !== 'overview') {
+        document.querySelector(`[data-board="${step}"] .board-title`)?.click();
+      }
+      if (step === 'announcements') document.querySelector('.ann-head')?.click();
+    }
+    ensureStorySync().classList.toggle('hidden', step !== 'sync');
+    document.documentElement.dataset.storyStep = step;
+    resetStoryScroll();
+    // These scenes are static; the parent owns scroll transitions. Cancelling
+    // the renderer's FLIP motion also makes rapid scrolling and snapshots exact.
+    document.getAnimations().forEach(animation => animation.cancel());
+    Promise.resolve().then(() => Promise.resolve()).then(() => {
+      if (revision !== storyRevision) return;
+      resetStoryScroll();
+      tellParent('canvas-story-applied', step);
+    });
+  }
+
+  window.addEventListener('message', event => {
+    if (!storyMode || event.source !== window.parent || event.origin !== location.origin) return;
+    if (event.data?.type !== 'canvas-story' || !storySteps.has(event.data.step)) return;
+    pendingStoryStep = event.data.step;
+    if (rendererReady) applyStoryStep(pendingStoryStep);
+  });
+
   function applyInitialView() {
+    rendererReady = true;
+    if (storyMode) {
+      applyStoryStep(pendingStoryStep);
+      document.documentElement.dataset.demoReady = 'true';
+      tellParent('canvas-story-ready');
+      return;
+    }
     const course = params.get('course');
     const section = params.get('section');
     if (/^[1-5]$/.test(course || '')) {
