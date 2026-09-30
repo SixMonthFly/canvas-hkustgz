@@ -14,3 +14,98 @@ html, body { min-width: 720px; }
   pointer-events: none;
 }
 #toast { max-width: min(540px, calc(100vw - 40px)); white-space: normal; text-align: center; }
+
+/* Scroll story: the parent page presents each scene without an iframe click. */
+html[data-story-mode="true"] { scrollbar-width: none; }
+html[data-story-mode="true"] *,
+html[data-story-mode="true"] *::before,
+html[data-story-mode="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-story-mode="true"] body { cursor: default; }
+html[data-story-mode="true"] .story-sync {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  background: rgba(230, 236, 244, .74);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  pointer-events: none;
+}
+html[data-story-mode="true"] .story-sync-card {
+  width: min(430px, calc(100vw - 70px));
+  padding: 27px 32px 25px;
+  border: 1px solid rgba(255, 255, 255, .88);
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(0, 38, 70, .14);
+  background: #fffefb;
+  color: #133048;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+html[data-story-mode="true"] .story-sync-caption {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #637885;
+}
+html[data-story-mode="true"] .story-sync-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ae8a4c;
+}
+html[data-story-mode="true"] .story-sync-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 25px 0 20px;
+  border-radius: 17px;
+  background: #edf3f6;
+}
+html[data-story-mode="true"] .story-sync-icon svg {
+  width: 33px;
+  height: 33px;
+  fill: none;
+  stroke: #075471;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html[data-story-mode="true"] .story-sync-card h2 {
+  margin: 0 0 12px;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -.6px;
+}
+html[data-story-mode="true"] .story-sync-card p {
+  margin: 0 0 25px;
+  color: #64737c;
+  font-size: 13px;
+  line-height: 1.8;
+}
+html[data-story-mode="true"] .story-sync-login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid #e7ecef;
+  border-bottom: 1px solid #e7ecef;
+  font-size: 13px;
+}
+html[data-story-mode="true"] .story-sync-check { color: #338465; font-size: 16px; }
+html[data-story-mode="true"] .story-sync-state { margin-left: auto; color: #71818c; font-size: 10px; }
+html[data-story-mode="true"] .story-sync-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 19px;
+  color: #64737c;
+  font-size: 11px;
+}
+html[data-story-mode="true"] .story-sync-track { height: 5px; margin: 9px 0 20px; border-radius: 5px; background: #e7ecef; }
+html[data-story-mode="true"] .story-sync-track span { display: block; width: 68%; height: 100%; border-radius: inherit; background: #997631; }
+html[data-story-mode="true"] .story-sync-card small { color: #8a959b; font-size: 10px; }
