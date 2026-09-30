@@ -8,6 +8,14 @@
 
 `site/` 是可直接发布的静态页面，包含虚构课程数据的真实界面演示。页面不会连接学校账号、Canvas 或 AI 服务。
 
+## 当前网站改版
+
+此次页面只需向下滚动，即依次展示同步、全部课程、一门课总览以及作业、公告、课件、课程结构分析四块看板，最后到下载区。课程界面在场景切换时淡出、淡入，减少动态效果设置下即时切换。AI 示意图从进入时就完整显示「问一句」「通过 MCP 查询」「返回作业与截止时间」的对话，三个滚动章节只推进说明文案，图片不使用裁切或逐步遮罩。标题采用宋体、正文采用苹方等系统字体。
+
+滚动界面使用 `site/demo/index.html?story=1`，由同源父页面通过 `postMessage` 驱动虚构场景。iframe 沿用本地 mock API，不执行学校登录、同步、AI 或下载操作。普通点击演示仍保留。
+
+从源码导出时，`website/scripts/build-pages.mjs` 只复制白名单资源，已包含 `ai-homework.svg`。新增资源须同时更新该名单；发布前确认 `site/assets/ai-homework.svg` 存在，并保留 `site/assets/SOURCES.md`。改版不改变 Mac v0.3.6 / Windows v0.3.7 的独立下载元数据。
+
 ## 发布
 
 1. 将本目录中的发布文件更新到 `SixMonthFly/canvas-hkustgz` 的 `main` 分支。
