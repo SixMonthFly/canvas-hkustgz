@@ -7,7 +7,7 @@ let selectedPlatform = /Windows|Win32|Win64/i.test([navigator.userAgentData?.pla
 const platforms = {
   mac: {
     name: 'Mac', arch: 'Apple Silicon', system: 'macOS 13+', format: 'DMG 安装包', extension: '.dmg',
-    compatibility: 'macOS 13+ · Apple Silicon', eyebrow: 'A PLACE ON YOUR MAC',
+    compatibility: 'macOS 13+ · Apple Silicon', eyebrow: '开始使用 Mac 版',
     installCompatibility: '适用于 macOS 13 及以上的 Apple Silicon Mac。\n安装后，使用学校账号登录 Canvas。',
     packageNote: 'Intel 版暂未提供', packageDetail: 'DMG · 尚未公证',
     noticeTitle: '首次打开前，请留意',
@@ -22,7 +22,7 @@ const platforms = {
   },
   windows: {
     name: 'Windows', arch: 'x64', system: 'Windows 10/11', format: 'EXE 一键安装', extension: '.exe',
-    compatibility: 'Windows 10/11 · x64', eyebrow: 'A PLACE ON YOUR PC',
+    compatibility: 'Windows 10/11 · x64', eyebrow: '开始使用 Windows 版',
     installCompatibility: '适用于 Windows 10/11 x64 电脑。\n一键安装后，使用学校账号登录 Canvas。',
     packageNote: '一键安装 · 当前用户', packageDetail: 'EXE · 一键安装',
     noticeTitle: '双击安装，准备就绪',
@@ -172,3 +172,115 @@ async function loadRelease() {
 }
 renderPlatform();
 loadRelease();
+
+// One ordinary page scroll drives the entire tour. No wheel interception,
+// automatic scrolling or click is required to advance a scene.
+const storyFrame = document.querySelector('#story-demo');
+const storyViewport = document.querySelector('.story-viewport');
+const storyChapters = [...document.querySelectorAll('[data-story]')];
+const aiChapters = [...document.querySelectorAll('[data-ai-step]')];
+const aiPicture = document.querySelector('.ai-picture');
+const storyCaption = document.querySelector('#story-caption');
+let activeStory = -1;
+let activeAI = -1;
+let scrollQueued = false;
+let displayedStory = null;
+let sentStory = null;
+let fadeTimer;
+let revealTimer;
+let sceneRevision = 0;
+const reducedStoryMotion = matchMedia('(prefers-reduced-motion: reduce)');
+function sendStory(animate = true) {
+  if (activeStory < 0) return;
+  const step = storyChapters[activeStory].dataset.story;
+  if (animate && step === displayedStory && !storyFrame.classList.contains('is-switching')) return;
+  const revision = ++sceneRevision;
+  clearTimeout(fadeTimer);
+  clearTimeout(revealTimer);
+  const postStep = () => {
+    if (revision !== sceneRevision) return;
+    sentStory = step;
+    storyFrame.contentWindow.postMessage({ type: 'canvas-story', step }, location.origin);
+    // Keep the page readable even if an iframe acknowledgement is delayed.
+    revealTimer = setTimeout(() => {
+      if (revision === sceneRevision) storyFrame.classList.remove('is-switching');
+    }, 1200);
+  };
+  if (!animate || displayedStory === null || reducedStoryMotion.matches) {
+    storyFrame.classList.remove('is-switching');
+    postStep();
+  } else {
+    // Change the renderer only after the old scene has gently faded away.
+    // Rapid scroll updates cancel the pending change and use the newest scene.
+    storyFrame.classList.add('is-switching');
+    fadeTimer = setTimeout(postStep, 180);
+  }
+}
+function fitStory() {
+  const stage = document.querySelector('.story-stage');
+  const figure = document.querySelector('.ai-figure');
+  // Fit the full window and its caption in short desktop viewports as well.
+  stage.style.maxWidth = innerWidth > 800 ? `${Math.max(360, (innerHeight - 150) * 1180 / 800)}px` : '';
+  figure.style.maxWidth = innerWidth > 800 ? `${Math.max(360, (innerHeight - 130) * 1200 / 850)}px` : '';
+  storyFrame.style.setProperty('--demo-scale', String(storyViewport.clientWidth / 1180));
+  stage.style.setProperty('--stage-top', `${Math.max(22, (innerHeight - stage.offsetHeight) / 2)}px`);
+  figure.style.setProperty('--stage-top', `${Math.max(22, (innerHeight - figure.offsetHeight) / 2)}px`);
+}
+function visibleChapter(chapters) {
+  const marker = innerHeight * (innerWidth <= 800 ? .78 : .52);
+  let selected = 0;
+  let nearest = Infinity;
+  for (let i = 0; i < chapters.length; i++) {
+    const copy = chapters[i].querySelector('.chapter-copy') || chapters[i].firstElementChild;
+    const rect = copy.getBoundingClientRect();
+    const distance = Math.abs(rect.top + rect.height / 2 - marker);
+    if (distance < nearest) { selected = i; nearest = distance; }
+  }
+  return selected;
+}
+function updateTour() {
+  scrollQueued = false;
+  const nextStory = visibleChapter(storyChapters);
+  if (nextStory !== activeStory) {
+    activeStory = nextStory;
+    storyChapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === activeStory));
+    storyCaption.textContent = storyChapters[activeStory].querySelector('h3').textContent;
+    document.querySelector('.story-stage').style.setProperty('--story-progress', `${(activeStory + 1) / storyChapters.length * 100}%`);
+    sendStory();
+  }
+  const nextAI = visibleChapter(aiChapters);
+  if (nextAI !== activeAI) {
+    activeAI = nextAI;
+    aiChapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === activeAI));
+    aiPicture.dataset.step = String(activeAI);
+  }
+}
+function queueTour() {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(updateTour);
+}
+window.addEventListener('message', event => {
+  if (event.origin !== location.origin || event.source !== storyFrame.contentWindow) return;
+  if (event.data?.type === 'canvas-story-ready') {
+    sendStory(false);
+  } else if (event.data?.type === 'canvas-story-applied') {
+    const step = storyChapters[activeStory]?.dataset.story;
+    if (event.data.step !== step || event.data.step !== sentStory) return;
+    displayedStory = step;
+    clearTimeout(revealTimer);
+    storyFrame.classList.remove('is-switching');
+  }
+});
+storyFrame.addEventListener('load', () => {
+  displayedStory = null;
+  sendStory(false);
+});
+reducedStoryMotion.addEventListener('change', () => sendStory(false));
+new ResizeObserver(() => { fitStory(); queueTour(); }).observe(storyViewport);
+window.addEventListener('scroll', queueTour, { passive: true });
+window.addEventListener('resize', () => { fitStory(); queueTour(); }, { passive: true });
+window.addEventListener('pageshow', queueTour);
+document.documentElement.classList.add('story-enhanced');
+fitStory();
+updateTour();
