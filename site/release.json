@@ -1,31 +1,31 @@
 {
-  "version": "0.3.6",
-  "tag": "v0.3.6",
+  "version": "4.0.0",
+  "tag": "v4.0.0",
+  "filename": "CanvasManager-4.0.0-mac-arm64.dmg",
+  "size": 142821825,
+  "sha256": "89d8a4eaba4a7cb9a465fde445fb7d0816c8f2f69b64f89b72ddf45bfac09e0a",
   "available": false,
-  "filename": "CanvasManager-0.3.6-mac-arm64.dmg",
-  "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v0.3.6/CanvasManager-0.3.6-mac-arm64.dmg",
-  "size": 142147978,
-  "sha256": "911caf1bb2cd4dca1ef823897a3cbf5c375a40d6e2e005ef82553e4a57cf8f56",
+  "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v4.0.0/CanvasManager-4.0.0-mac-arm64.dmg",
   "schemaVersion": 2,
   "packages": {
     "mac": {
-      "version": "0.3.6",
-      "tag": "v0.3.6",
+      "version": "4.0.0",
+      "tag": "v4.0.0",
+      "filename": "CanvasManager-4.0.0-mac-arm64.dmg",
+      "size": 142821825,
+      "sha256": "89d8a4eaba4a7cb9a465fde445fb7d0816c8f2f69b64f89b72ddf45bfac09e0a",
       "available": false,
-      "filename": "CanvasManager-0.3.6-mac-arm64.dmg",
-      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v0.3.6/CanvasManager-0.3.6-mac-arm64.dmg",
-      "size": 142147978,
-      "sha256": "911caf1bb2cd4dca1ef823897a3cbf5c375a40d6e2e005ef82553e4a57cf8f56"
+      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v4.0.0/CanvasManager-4.0.0-mac-arm64.dmg"
     },
     "windows": {
-      "version": "0.3.7",
-      "tag": "v0.3.7",
-      "filename": "CanvasManager-Setup-0.3.7-x64.exe",
-      "size": 122153645,
-      "sha256": "f309735c603db258e9d3afebd14a3c1245b99b3334cdeee0a760d7b33cd6be76",
-      "sourceRelease": "https://github.com/SixMonthFly/canvas-hkustgz/releases/tag/v0.3.7",
+      "version": "4.0.0",
+      "tag": "v4.0.0",
+      "filename": "CanvasManager-Setup-4.0.0-x64.exe",
+      "size": 122254640,
+      "sha256": "f69506d7c68acf8f2574b80d55e2aa6263ae2f79908247b3a73ac3021c175e39",
+      "sourceRelease": "https://github.com/SixMonthFly/canvas-hkustgz/releases/tag/v4.0.0",
       "available": false,
-      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v0.3.7/CanvasManager-Setup-0.3.7-x64.exe"
+      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v4.0.0/CanvasManager-Setup-4.0.0-x64.exe"
     }
   }
 }

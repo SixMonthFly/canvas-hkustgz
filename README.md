@@ -1,3 +1,9 @@
+## 4.0.0 发布准备（2026-10-02）
+
+本次完整客户端提供设置页插件管理、默认关闭的 AI 助手、按需安装的皮肤、macOS 原生七天作业小组件，以及 HKUST 徽标搭配 C 角标的新图标。基础 Mac 应用要求 macOS 13+ / Apple Silicon，小组件要求 macOS 14+。独立 MCP 服务保留；客户端小包更新与在线插件下载尚未开放。
+
+Mac DMG 使用本地签名，尚未 Apple 公证；Windows x64 EXE 尚未签名，也未在 Windows 实机运行。下面的 0.3.x 内容保留为历史审计记录；4.0.0 的正式上线状态以新 Release 与部署核验记录为准。
+
 # Canvas 课程管理官网
 
 面向港科广同学的中文 Mac / Windows 软件下载站。GitHub Pages 托管网页，GitHub Releases 存储独立版本的完整安装包。

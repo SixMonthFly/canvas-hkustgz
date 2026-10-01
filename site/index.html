@@ -7,13 +7,13 @@
   <meta name="theme-color" content="#081d39">
   <title>Canvas 课程管理 · 在港科广，从容安排每一课</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=scroll-story-2">
-  <script src="site.js?v=scroll-story-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=release-v4.0.0">
+  <script src="site.js?v=release-v4.0.0" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="Canvas 课程管理首页"><span class="brand-mark">C<span></span></span><span>Canvas <b>课程管理</b></span></a>
+    <a class="brand" href="#" aria-label="Canvas 课程管理首页"><img class="brand-mark" src="assets/app-icon.png" width="36" height="36" alt=""><span>Canvas <b>课程管理</b></span></a>
     <nav aria-label="主导航"><a href="#features">看看怎么用</a><a href="#ai">让 AI 帮忙</a><a href="#install">安装指南</a></nav>
     <a class="nav-download" href="#download"><span data-download-nav>下载 Mac 版</span> <span aria-hidden="true">↗</span></a>
   </header>
@@ -33,7 +33,7 @@
             <div class="window-chrome"><div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div><span>Canvas 课程管理</span></div>
             <div class="demo-viewport"><iframe id="hero-demo" src="demo/index.html" title="Canvas 课程总览（虚构演示课程）" tabindex="-1" inert loading="eager"></iframe></div>
           </div>
-          <p class="preview-caption">应用真实界面，课程为演示数据</p>
+          <p class="preview-caption">界面示例（启用 AI 后），课程为演示数据</p>
         </div>
       </div>
       <div class="hero-bottom wrap"><span>少一些来回切换，多一些专注。</span><span>往下划，跟着用一遍 <span aria-hidden="true">↓</span></span></div>
@@ -50,7 +50,7 @@
             <div class="chapter-copy"><p class="chapter-label">全部课程</p><h3>这周忙不忙，一眼就知道。</h3><p>先看最近一项截止，再看未来 30 天。不同课程用不同颜色，哪天要交什么，都放在一张月历里。</p><span class="chapter-note">下一项截止 · 30 天月历</span></div>
           </article>
           <article class="story-chapter" data-story="overview" id="story-overview">
-            <div class="chapter-copy"><p class="chapter-label">进入一门课</p><h3>一门课的事，都在这儿。</h3><p>点进课程，作业、公告、课件、课程结构分析，四块看板一起呈现。接下来，逐个看看。</p><span class="chapter-note">四块看板 · 随时回到总览</span></div>
+            <div class="chapter-copy"><p class="chapter-label">进入一门课</p><h3>一门课的事，都在这儿。</h3><p>点进课程，作业、公告、课件，三块看板一起呈现；启用 AI 插件后，还能查看课程结构分析。接下来，逐个看看。</p><span class="chapter-note">基础三块看板 · AI 按需开启</span></div>
           </article>
           <article class="story-chapter" data-story="assignments" id="story-assignments">
             <div class="chapter-copy"><p class="chapter-label">作业看板</p><h3>下一份作业，从这里开始。</h3><p>什么时候交、要做什么，打开作业就能看。需要一点思路时，还能让 AI 帮你理解要求、拆出步骤。</p><span class="chapter-note">查看作业要求 · 梳理完成思路</span></div>
@@ -71,6 +71,11 @@
           <div class="story-progress" aria-hidden="true"><span></span></div>
         </div>
       </div>
+    </section>
+
+    <section class="widget-section section wrap" id="widgets" aria-labelledby="widget-title">
+      <div><p class="eyebrow dark-eyebrow">4.0 · 按你的习惯来</p><h2 id="widget-title">七天内要交的作业，<br>桌面上就看见。</h2><p>Mac 原生小组件，把接下来七天的作业按截止时间放好。支持小、中、大三种尺寸，点击回到应用；课程信息来自最近一次同步。</p><p class="widget-guide">在「设置 → 插件」启用 Mac 系统小组件，再到桌面右键「编辑小组件」，搜索 Canvas。小组件需要 macOS 14 或更高版本。</p><h3>需要的功能，再装上。</h3><p>AI 助手首次默认关闭，需要时在「设置 → 插件」启用。HKUST 皮肤默认安装，其他皮肤可按需安装。卸载插件会保留课程、配置和报告，之后可从随包副本重新安装。</p></div>
+      <figure><img src="assets/widget-preview.svg" width="720" height="540" alt="Mac 桌面小组件示意，展示未来七天的三项虚构作业及截止时间。"><figcaption>虚构数据与布局示意 · 小组件刷新由 macOS 调度</figcaption></figure>
     </section>
 
     <section class="ai-story" id="ai" aria-labelledby="ai-title">
@@ -97,13 +102,13 @@
       <details id="windows-install"><summary>Windows 版如何安装？<span aria-hidden="true">+</span></summary><div class="answer">Windows 版适用于 Windows 10/11 x64，提供完整 EXE 一键安装包。下载后双击运行，为当前用户安装，完成后自动启动；之后可从桌面或开始菜单快捷方式打开。进入应用，点击「同步」并完成学校账号登录即可使用。当前安装器尚未签名，Windows 可能显示首次运行提示。</div></details>
       <details id="first-open"><summary>macOS 提示无法验证开发者，怎么办？<span aria-hidden="true">+</span></summary><div class="answer">当前版本使用本地签名，尚未完成 Apple 开发者签名与公证。确认下载来源后，可在尝试打开应用后，前往「系统设置 → 隐私与安全性」查看是否提供「仍要打开」。具体提示会随系统版本变化。<br><br>如果系统明确提示恶意软件或文件损坏，请停止安装并反馈问题。详细操作可参考 <a href="https://support.apple.com/zh-cn/102445" target="_blank" rel="noopener noreferrer">Apple 的安全打开应用说明 ↗</a>。</div></details>
       <details><summary>需要另外注册账号吗？<span aria-hidden="true">+</span></summary><div class="answer">不需要为本工具单独注册。首次使用时点击应用内的「同步」，在弹出的学校登录页面完成登录。需要你的学校账号拥有对应 Canvas 课程的访问权限。</div></details>
-      <details><summary>课程数据和 AI 功能如何处理？<span aria-hidden="true">+</span></summary><div class="answer">课程缓存、下载文件与设置保存在本机。课程同步需要连接学校 Canvas；使用 AI 功能时，相关课程或作业内容会发送至所使用的 AI 服务进行处理。请按自己的需求选择是否使用 AI，服务提供方与设置可在应用内查看。</div></details>
+      <details><summary>课程数据和 AI 功能如何处理？<span aria-hidden="true">+</span></summary><div class="answer">课程缓存、下载文件与设置保存在本机。课程同步需要连接学校 Canvas；使用 AI 功能时，相关课程或作业内容会发送至所使用的 AI 服务进行处理。请按自己的需求选择是否使用 AI，AI 助手首次默认不启用，可在「设置 → 插件」开启，服务提供方与设置也在该页查看。</div></details>
       <details><summary>这是学校或 Canvas 官方出品的吗？<span aria-hidden="true">+</span></summary><div class="answer">这是为港科广同学开发的独立工具，并非学校或 Instructure Canvas 的官方产品。课程信息以学校 Canvas 为准。使用中遇到问题，可以前往 <a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/issues" target="_blank" rel="noopener noreferrer">项目反馈页面 ↗</a>。</div></details>
     </div></section>
 
-    <section class="download-section" id="download" aria-labelledby="download-title"><div class="wrap download-inner"><div class="download-copy"><div class="eyebrow"><span class="status-dot"></span> 现在，轮到你的课程了</div><h2 id="download-title">准备好，<br>安排你的下一课。</h2><p>下载后，同步一次学校课程，就可以开始。<br>Mac 和 Windows，都准备好了。</p><button class="text-button" data-open-preview>也可以自己试试演示 ↗</button></div><div class="download-panel"><div class="platform-choice panel-platform-choice"><span class="platform-caption">选择系统</span><div class="platform-switch" role="group" aria-label="下载面板系统选择"><button type="button" data-platform="mac" aria-pressed="true">Mac 版</button><button type="button" data-platform="windows" aria-pressed="false">Windows 版</button></div></div><div class="download-app"><img src="assets/app-icon.png" width="58" height="58" alt=""><div><strong>Canvas 课程管理</strong><span data-platform-compatibility>macOS 13+ · Apple Silicon</span></div><span class="version-pill" data-version>v0.3.6</span></div><a class="button button-gold download-wide" data-download href="#download" aria-disabled="true"><span data-download-label>下载 Mac 版</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a><noscript><p class="package-detail">启用 JavaScript 后可显示下载信息，也可直接<a href="https://github.com/SixMonthFly/canvas-hkustgz/releases" target="_blank" rel="noopener noreferrer">前往安装包页面 ↗</a>。</p></noscript><p class="package-detail" id="package-detail" role="status" aria-live="polite">正在读取 Mac 安装包信息…</p><div class="package-line"><span id="platform-package-note">Intel 版暂未提供</span><a id="package-install-link" href="#first-open" data-expand="first-open">首次打开说明 ↗</a></div><details class="checksum"><summary>安装包校验信息</summary><code id="checksum-value">安装包准备完成后显示 SHA-256。</code></details></div></div></section>
+    <section class="download-section" id="download" aria-labelledby="download-title"><div class="wrap download-inner"><div class="download-copy"><div class="eyebrow"><span class="status-dot"></span> 现在，轮到你的课程了</div><h2 id="download-title">准备好，<br>安排你的下一课。</h2><p>下载后，同步一次学校课程，就可以开始。<br>Mac 和 Windows，都准备好了。</p><button class="text-button" data-open-preview>也可以自己试试演示 ↗</button></div><div class="download-panel"><div class="platform-choice panel-platform-choice"><span class="platform-caption">选择系统</span><div class="platform-switch" role="group" aria-label="下载面板系统选择"><button type="button" data-platform="mac" aria-pressed="true">Mac 版</button><button type="button" data-platform="windows" aria-pressed="false">Windows 版</button></div></div><div class="download-app"><img src="assets/app-icon.png" width="58" height="58" alt=""><div><strong>Canvas 课程管理</strong><span data-platform-compatibility>macOS 13+ · Apple Silicon</span></div><span class="version-pill" data-version>v4.0.0</span></div><a class="button button-gold download-wide" data-download href="#download" aria-disabled="true"><span data-download-label>下载 Mac 版</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a><noscript><p class="package-detail">启用 JavaScript 后可显示下载信息，也可直接<a href="https://github.com/SixMonthFly/canvas-hkustgz/releases" target="_blank" rel="noopener noreferrer">前往安装包页面 ↗</a>。</p></noscript><p class="package-detail" id="package-detail" role="status" aria-live="polite">正在读取 Mac 安装包信息…</p><div class="package-line"><span id="platform-package-note">Intel 版暂未提供</span><a id="package-install-link" href="#first-open" data-expand="first-open">首次打开说明 ↗</a></div><details class="checksum"><summary>安装包校验信息</summary><code id="checksum-value">安装包准备完成后显示 SHA-256。</code></details></div></div></section>
   </main>
-  <footer class="site-footer wrap"><div><a class="brand footer-brand" href="#"><span class="brand-mark">C<span></span></span><span>Canvas <b>课程管理</b></span></a><p>在港科广，从容安排每一课。</p></div><div class="footer-links"><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas" target="_blank" rel="noopener noreferrer">开源项目 ↗</a><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/issues" target="_blank" rel="noopener noreferrer">问题反馈 ↗</a><span>独立学生工具 · 非学校官方产品</span><span class="photo-credit">校园摄影：<a href="https://commons.wikimedia.org/wiki/File:Main_Entrance,_HKUST(GZ)_20220827.jpg" target="_blank" rel="noopener noreferrer">Tim Wu</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · 网页裁切与蓝色遮罩</span></div></footer>
+  <footer class="site-footer wrap"><div><a class="brand footer-brand" href="#"><img class="brand-mark" src="assets/app-icon.png" width="36" height="36" alt=""><span>Canvas <b>课程管理</b></span></a><p>在港科广，从容安排每一课。</p></div><div class="footer-links"><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas" target="_blank" rel="noopener noreferrer">开源项目 ↗</a><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/issues" target="_blank" rel="noopener noreferrer">问题反馈 ↗</a><span>独立学生工具 · 非学校官方产品</span><span class="photo-credit">校园摄影：<a href="https://commons.wikimedia.org/wiki/File:Main_Entrance,_HKUST(GZ)_20220827.jpg" target="_blank" rel="noopener noreferrer">Tim Wu</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · 网页裁切与蓝色遮罩</span></div></footer>
   <dialog id="preview-dialog" aria-labelledby="preview-title"><div class="dialog-heading"><div><strong id="preview-title">Canvas 课程管理 · 界面演示</strong><span>虚构演示数据，不连接账号或 AI。小屏可横向滚动查看。</span></div><button id="close-preview" aria-label="关闭界面体验">✕</button></div><iframe id="large-demo" title="可交互的 Canvas 应用演示"></iframe></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
