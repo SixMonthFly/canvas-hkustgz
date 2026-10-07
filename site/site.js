@@ -184,6 +184,13 @@ const storyChapters = [...document.querySelectorAll('[data-story]')];
 const aiChapters = [...document.querySelectorAll('[data-ai-step]')];
 const aiPicture = document.querySelector('.ai-picture');
 const storyCaption = document.querySelector('#story-caption');
+const storyLayout = document.querySelector('.story-layout');
+const storyStage = document.querySelector('.story-stage');
+const storyLabel = document.createElement('span');
+storyLabel.className = 'story-caption-label';
+storyCaption.before(storyLabel);
+storyLayout.style.setProperty('--story-scenes', storyChapters.length);
+document.querySelector('.story-chapters').setAttribute('aria-hidden', 'true');
 let activeStory = -1;
 let activeAI = -1;
 let scrollQueued = false;
@@ -193,6 +200,11 @@ let fadeTimer;
 let revealTimer;
 let sceneRevision = 0;
 const reducedStoryMotion = matchMedia('(prefers-reduced-motion: reduce)');
+function updateStoryCaption() {
+  const chapter = storyChapters[activeStory];
+  storyCaption.textContent = chapter.querySelector('h3').textContent;
+  storyLabel.textContent = `${String(activeStory + 1).padStart(2, '0')} / ${String(storyChapters.length).padStart(2, '0')} · ${chapter.querySelector('.chapter-label').textContent}`;
+}
 function sendStory(animate = true) {
   if (activeStory < 0) return;
   const step = storyChapters[activeStory].dataset.story;
@@ -206,7 +218,7 @@ function sendStory(animate = true) {
     storyFrame.contentWindow.postMessage({ type: 'canvas-story', step }, location.origin);
     // Keep the page readable even if an iframe acknowledgement is delayed.
     revealTimer = setTimeout(() => {
-      if (revision === sceneRevision) storyFrame.classList.remove('is-switching');
+      if (revision === sceneRevision) { updateStoryCaption(); storyFrame.classList.remove('is-switching'); }
     }, 1200);
   };
   if (!animate || displayedStory === null || reducedStoryMotion.matches) {
@@ -220,13 +232,14 @@ function sendStory(animate = true) {
   }
 }
 function fitStory() {
-  const stage = document.querySelector('.story-stage');
   const figure = document.querySelector('.ai-figure');
-  // Fit the full window and its caption in short desktop viewports as well.
-  stage.style.maxWidth = innerWidth > 800 ? `${Math.max(360, (innerHeight - 150) * 1180 / 800)}px` : '';
   figure.style.maxWidth = innerWidth > 800 ? `${Math.max(360, (innerHeight - 130) * 1200 / 850)}px` : '';
-  storyFrame.style.setProperty('--demo-scale', String(storyViewport.clientWidth / 1180));
-  stage.style.setProperty('--stage-top', `${Math.max(22, (innerHeight - stage.offsetHeight) / 2)}px`);
+  const demoWidth = innerWidth <= 800 ? 720 : 1180;
+  const scale = storyViewport.clientWidth / demoWidth;
+  storyFrame.style.width = `${demoWidth}px`;
+  storyFrame.style.setProperty('--demo-scale', String(scale));
+  // Let the demo use the viewport's actual aspect ratio without cropping it.
+  storyFrame.style.height = `${storyViewport.clientHeight / scale}px`;
   figure.style.setProperty('--stage-top', `${Math.max(22, (innerHeight - figure.offsetHeight) / 2)}px`);
 }
 function visibleChapter(chapters) {
@@ -243,12 +256,13 @@ function visibleChapter(chapters) {
 }
 function updateTour() {
   scrollQueued = false;
-  const nextStory = visibleChapter(storyChapters);
+  const travel = Math.max(1, storyLayout.offsetHeight - storyStage.offsetHeight);
+  const progress = Math.max(0, Math.min(1, -storyLayout.getBoundingClientRect().top / travel));
+  const nextStory = Math.min(storyChapters.length - 1, Math.floor(progress * storyChapters.length));
   if (nextStory !== activeStory) {
     activeStory = nextStory;
     document.querySelector('.story-stage').dataset.scene = storyChapters[activeStory].dataset.story;
     storyChapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === activeStory));
-    storyCaption.textContent = storyChapters[activeStory].querySelector('h3').textContent;
     document.querySelector('.story-stage').style.setProperty('--story-progress', `${(activeStory + 1) / storyChapters.length * 100}%`);
     sendStory();
   }
@@ -272,6 +286,7 @@ window.addEventListener('message', event => {
     const step = storyChapters[activeStory]?.dataset.story;
     if (event.data.step !== step || event.data.step !== sentStory) return;
     displayedStory = step;
+    updateStoryCaption();
     clearTimeout(revealTimer);
     storyFrame.classList.remove('is-switching');
   }
