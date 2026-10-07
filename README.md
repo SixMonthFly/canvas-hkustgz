@@ -45,6 +45,10 @@ Canvas Manager is a completely free, open-source project that uses school Canvas
 
 This repository contains the public website, fictional-data demo and release assets. App source is hosted on Gitee. This independent tool is not affiliated with any university or Instructure Canvas.
 
+官网功能现以独立卡片直接铺开，支持同步进度、月历高亮、下载进度、分析路径、MCP 对话和插件/API 内容自动滚动；动效可暂停并遵循系统减弱动态设置。中英文页面同步维护。
+
+Features are presented in a normal-flow gallery with animated sync, calendar, file download, analysis and MCP previews. Animations can be paused and respect reduced-motion preferences.
+
 官网排版与动效参考 [DeepSeek Harness](https://www.deepseek.com/en/harness/)，未使用其品牌素材。网页演示不连接学校账号、Canvas 或 AI 服务。
 
 ## 网站维护

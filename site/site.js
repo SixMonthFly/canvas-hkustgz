@@ -176,134 +176,6 @@ async function loadRelease() {
 renderPlatform();
 loadRelease();
 
-// One ordinary page scroll drives the entire tour. No wheel interception,
-// automatic scrolling or click is required to advance a scene.
-const storyFrame = document.querySelector('#story-demo');
-const storyViewport = document.querySelector('.story-viewport');
-const storyChapters = [...document.querySelectorAll('[data-story]')];
-const aiChapters = [...document.querySelectorAll('[data-ai-step]')];
-const aiPicture = document.querySelector('.ai-picture');
-const storyCaption = document.querySelector('#story-caption');
-const storyLayout = document.querySelector('.story-layout');
-const storyStage = document.querySelector('.story-stage');
-const storyLabel = document.createElement('span');
-storyLabel.className = 'story-caption-label';
-storyCaption.before(storyLabel);
-storyLayout.style.setProperty('--story-scenes', storyChapters.length);
-document.querySelector('.story-chapters').setAttribute('aria-hidden', 'true');
-let activeStory = -1;
-let activeAI = -1;
-let scrollQueued = false;
-let displayedStory = null;
-let sentStory = null;
-let fadeTimer;
-let revealTimer;
-let sceneRevision = 0;
-const reducedStoryMotion = matchMedia('(prefers-reduced-motion: reduce)');
-function updateStoryCaption() {
-  const chapter = storyChapters[activeStory];
-  storyCaption.textContent = chapter.querySelector('h3').textContent;
-  storyLabel.textContent = `${String(activeStory + 1).padStart(2, '0')} / ${String(storyChapters.length).padStart(2, '0')} · ${chapter.querySelector('.chapter-label').textContent}`;
-}
-function sendStory(animate = true) {
-  if (activeStory < 0) return;
-  const step = storyChapters[activeStory].dataset.story;
-  if (animate && step === displayedStory && !storyFrame.classList.contains('is-switching')) return;
-  const revision = ++sceneRevision;
-  clearTimeout(fadeTimer);
-  clearTimeout(revealTimer);
-  const postStep = () => {
-    if (revision !== sceneRevision) return;
-    sentStory = step;
-    storyFrame.contentWindow.postMessage({ type: 'canvas-story', step }, location.origin);
-    // Keep the page readable even if an iframe acknowledgement is delayed.
-    revealTimer = setTimeout(() => {
-      if (revision === sceneRevision) { updateStoryCaption(); storyFrame.classList.remove('is-switching'); }
-    }, 1200);
-  };
-  if (!animate || displayedStory === null || reducedStoryMotion.matches) {
-    storyFrame.classList.remove('is-switching');
-    postStep();
-  } else {
-    // Change the renderer only after the old scene has gently faded away.
-    // Rapid scroll updates cancel the pending change and use the newest scene.
-    storyFrame.classList.add('is-switching');
-    fadeTimer = setTimeout(postStep, 180);
-  }
-}
-function fitStory() {
-  const figure = document.querySelector('.ai-figure');
-  figure.style.maxWidth = innerWidth > 800 ? `${Math.max(360, (innerHeight - 130) * 1200 / 850)}px` : '';
-  const demoWidth = innerWidth <= 800 ? 720 : 1180;
-  const scale = storyViewport.clientWidth / demoWidth;
-  storyFrame.style.width = `${demoWidth}px`;
-  storyFrame.style.setProperty('--demo-scale', String(scale));
-  // Let the demo use the viewport's actual aspect ratio without cropping it.
-  storyFrame.style.height = `${storyViewport.clientHeight / scale}px`;
-  figure.style.setProperty('--stage-top', `${Math.max(22, (innerHeight - figure.offsetHeight) / 2)}px`);
-}
-function visibleChapter(chapters) {
-  const marker = innerHeight * (innerWidth <= 800 ? .78 : .52);
-  let selected = 0;
-  let nearest = Infinity;
-  for (let i = 0; i < chapters.length; i++) {
-    const copy = chapters[i].querySelector('.chapter-copy') || chapters[i].firstElementChild;
-    const rect = copy.getBoundingClientRect();
-    const distance = Math.abs(rect.top + rect.height / 2 - marker);
-    if (distance < nearest) { selected = i; nearest = distance; }
-  }
-  return selected;
-}
-function updateTour() {
-  scrollQueued = false;
-  const travel = Math.max(1, storyLayout.offsetHeight - storyStage.offsetHeight);
-  const progress = Math.max(0, Math.min(1, -storyLayout.getBoundingClientRect().top / travel));
-  const nextStory = Math.min(storyChapters.length - 1, Math.floor(progress * storyChapters.length));
-  if (nextStory !== activeStory) {
-    activeStory = nextStory;
-    document.querySelector('.story-stage').dataset.scene = storyChapters[activeStory].dataset.story;
-    storyChapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === activeStory));
-    document.querySelector('.story-stage').style.setProperty('--story-progress', `${(activeStory + 1) / storyChapters.length * 100}%`);
-    sendStory();
-  }
-  const nextAI = visibleChapter(aiChapters);
-  if (nextAI !== activeAI) {
-    activeAI = nextAI;
-    aiChapters.forEach((chapter, i) => chapter.classList.toggle('is-current', i === activeAI));
-    aiPicture.dataset.step = String(activeAI);
-  }
-}
-function queueTour() {
-  if (scrollQueued) return;
-  scrollQueued = true;
-  requestAnimationFrame(updateTour);
-}
-window.addEventListener('message', event => {
-  if (event.origin !== location.origin || event.source !== storyFrame.contentWindow) return;
-  if (event.data?.type === 'canvas-story-ready') {
-    sendStory(false);
-  } else if (event.data?.type === 'canvas-story-applied') {
-    const step = storyChapters[activeStory]?.dataset.story;
-    if (event.data.step !== step || event.data.step !== sentStory) return;
-    displayedStory = step;
-    updateStoryCaption();
-    clearTimeout(revealTimer);
-    storyFrame.classList.remove('is-switching');
-  }
-});
-storyFrame.addEventListener('load', () => {
-  displayedStory = null;
-  sendStory(false);
-});
-reducedStoryMotion.addEventListener('change', () => sendStory(false));
-new ResizeObserver(() => { fitStory(); queueTour(); }).observe(storyViewport);
-window.addEventListener('scroll', queueTour, { passive: true });
-window.addEventListener('resize', () => { fitStory(); queueTour(); }, { passive: true });
-window.addEventListener('pageshow', queueTour);
-document.documentElement.classList.add('story-enhanced');
-fitStory();
-updateTour();
-
 // Keyboard-accessible download menu. Each entry links directly to its own build.
 const dock = document.querySelector('.site-header');
 const downloadToggle = document.querySelector('#download-menu-toggle');
@@ -363,14 +235,14 @@ if ('IntersectionObserver' in window) {
   const entrance = new IntersectionObserver(entries => {
     for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('visible'); entrance.unobserve(entry.target); }
   }, {threshold:.12});
-  document.querySelectorAll('.school-list,.schools-heading,.widget-section>div,.widget-section figure,.story-intro,.ai-intro').forEach(el => {
+  document.querySelectorAll('.school-list,.schools-heading,.widget-section>div,.widget-section figure,.gallery-intro,.ai-intro,.feature-tile,.motion-card,.mcp-showcase').forEach(el => {
     if (!el.classList.contains('school-list')) el.classList.add('reveal');
     entrance.observe(el);
   });
 }
 updateScrollMotion();
 
-const previewCards = [...document.querySelectorAll('.motion-card')];
+const previewCards = [...document.querySelectorAll('.motion-card,[data-motion-preview]')];
 for (const card of previewCards) {
   const button = card.querySelector('.preview-pause');
   button.addEventListener('click', () => {
