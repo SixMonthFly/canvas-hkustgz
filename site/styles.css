@@ -126,19 +126,30 @@ html[lang=en] .school-list li{line-height:1.5}
 .story-enhanced .story-chapters{position:absolute;inset:0;pointer-events:none}
 .story-enhanced .story-chapter{height:100svh;min-height:0;padding:0;display:block;scroll-margin-top:0}
 .story-enhanced .story-chapter .chapter-copy{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.story-enhanced .story-stage{position:sticky;top:0;width:100%;max-width:none;height:100svh;box-sizing:border-box;margin:0;padding:94px 20px 20px;display:flex;flex-direction:column}
+.story-enhanced .story-stage{--story-gutter:clamp(28px,7vw,120px);position:sticky;top:0;width:100%;max-width:none;height:100svh;box-sizing:border-box;margin:0;padding:94px var(--story-gutter) 24px;display:flex;flex-direction:column}
 .story-enhanced .story-window{width:100%;height:100%;display:flex;flex-direction:column;border-radius:18px;transform:none!important;box-shadow:0 24px 80px -30px #2b46682b}
 .story-enhanced .story-window .window-chrome{flex:0 0 34px}
 .story-enhanced .story-viewport{flex:1;min-height:0;aspect-ratio:auto}
-.story-enhanced .story-caption{position:absolute;left:42px;bottom:42px;width:min(440px,calc(100% - 84px));box-sizing:border-box;display:block;margin:0;padding:22px 26px;border:1px solid #ffffffbd;border-radius:18px;background:#fffffff0;backdrop-filter:blur(18px);box-shadow:0 8px 36px #20395815;pointer-events:none}
+.story-enhanced .story-caption{position:absolute;left:calc(var(--story-gutter) + 22px);bottom:46px;width:min(400px,calc(100% - 2*var(--story-gutter) - 44px));box-sizing:border-box;display:block;margin:0;padding:22px 26px;border:1px solid #ffffffbd;border-radius:18px;background:#fffffff0;backdrop-filter:blur(18px);box-shadow:0 8px 36px #20395815;pointer-events:none}
 .story-enhanced .story-caption-label{display:block;font-size:11px;line-height:1.5;letter-spacing:.08em;color:#687789;margin-bottom:10px}
 .story-enhanced #story-caption{display:block;font-size:clamp(24px,2.5vw,36px);line-height:1.22;font-weight:650;letter-spacing:-.04em;color:#202c3b;min-height:2.44em;text-wrap:balance}
 .story-enhanced .story-caption>span:last-child{display:none}
-.story-enhanced .story-progress{position:absolute;bottom:20px;left:38px;right:38px;height:2px;margin:0;background:#dce4ee;z-index:2}
+.story-enhanced .story-progress{position:absolute;bottom:24px;left:calc(var(--story-gutter) + 18px);right:calc(var(--story-gutter) + 18px);height:2px;margin:0;background:#dce4ee;z-index:2}
 @media(max-width:800px){
- .story-enhanced .story-stage{padding:80px 10px 10px}
+ .story-enhanced .story-stage{--story-gutter:18px;padding:80px var(--story-gutter) 10px}
  .story-enhanced .story-window{border-radius:12px}
- .story-enhanced .story-caption{left:24px;bottom:26px;width:min(370px,calc(100% - 48px));padding:18px 20px;border-radius:14px}
+ .story-enhanced .story-caption{left:32px;bottom:26px;width:min(370px,calc(100% - 64px));padding:18px 20px;border-radius:14px}
  .story-enhanced #story-caption{font-size:26px}
- .story-enhanced .story-progress{left:24px;right:24px;bottom:10px}
+ .story-enhanced .story-progress{left:32px;right:32px;bottom:10px}
 }
+
+/* A quiet, persistent cue to continue the scroll-driven tour. */
+.story-scroll-cue{display:none}
+.story-enhanced .story-scroll-cue{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);z-index:3;display:grid;place-items:center;width:44px;height:50px;border:1px solid #d9e2edb3;border-radius:24px;background:#ffffffed;box-shadow:0 4px 20px #233d5712;backdrop-filter:blur(12px);pointer-events:none;color:#3f648c}
+.story-scroll-cue svg{width:28px;height:32px}
+.story-scroll-cue path{stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:scroll-cue-flow 1.8s ease-in-out infinite}
+.story-scroll-cue path+path{animation-delay:.18s}
+@keyframes scroll-cue-flow{0%,100%{transform:translateY(-2px);opacity:.4}50%{transform:translateY(3px);opacity:1}}
+@media(max-width:1100px){.story-enhanced .story-caption{bottom:98px}}
+@media(max-width:800px){.story-enhanced .story-scroll-cue{bottom:22px}.story-enhanced .story-caption{bottom:86px}}
+@media(prefers-reduced-motion:reduce){.story-scroll-cue path{animation:none;opacity:.8;transform:none}}
