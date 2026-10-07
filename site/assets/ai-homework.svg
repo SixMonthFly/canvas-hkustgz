@@ -3,12 +3,12 @@
   <desc id="desc">一段虚构的对话示意。学生问“七天内有什么作业”，AI 通过 MCP 读取 Canvas 管理工具中的课程作业，回答未来七天有三项作业：数据科学基础的数据清洗练习，明晚截止；数据库系统的查询优化报告，三天后截止；学术英语的阅读回应，六天后截止。学生还可以继续询问作业要求。</desc>
   <defs>
     <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f9f7f0"/>
-      <stop offset="1" stop-color="#f0ede4"/>
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f5f6f8"/>
     </linearGradient>
     <linearGradient id="message" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#163c66"/>
-      <stop offset="1" stop-color="#0f2a49"/>
+      <stop offset="1" stop-color="#20242a"/>
     </linearGradient>
     <filter id="window-shadow" x="-15%" y="-15%" width="130%" height="145%">
       <feDropShadow dx="0" dy="14" stdDeviation="20" flood-color="#27374a" flood-opacity=".07"/>
@@ -17,16 +17,16 @@
       <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#27374a" flood-opacity=".035"/>
     </filter>
   </defs>
-  <g font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" fill="#142d46">
+  <g font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" fill="#20242a">
     <rect width="1200" height="850" rx="32" fill="url(#paper)"/>
 
-    <rect x="58" y="46" width="1084" height="754" rx="30" fill="#fdfcf8" stroke="#e3dfd4" filter="url(#window-shadow)"/>
-    <path d="M58 134H1142" stroke="#e8e4da"/>
+    <rect x="58" y="46" width="1084" height="754" rx="30" fill="#ffffff" stroke="#dfe3e8" filter="url(#window-shadow)"/>
+    <path d="M58 134H1142" stroke="#e9ecf0"/>
 
     <!-- Quiet header: the conversation remains the focus. -->
     <g transform="translate(106 75)">
-      <rect width="38" height="38" rx="12" fill="#eee7d5"/>
-      <path d="M19 8v22M8 19h22M11.2 11.2l15.6 15.6M11.2 26.8l15.6-15.6" stroke="#96773f" stroke-width="2.4" stroke-linecap="round"/>
+      <rect width="38" height="38" rx="12" fill="#e8eef7"/>
+      <path d="M19 8v22M8 19h22M11.2 11.2l15.6 15.6M11.2 26.8l15.6-15.6" stroke="#235da0" stroke-width="2.4" stroke-linecap="round"/>
     </g>
     <text x="158" y="103" font-size="23" font-weight="600">你的 AI</text>
     <text x="1094" y="102" text-anchor="end" font-size="18" fill="#878879">交互示意 · 示例课程</text>
@@ -34,35 +34,35 @@
     <!-- Student's one-line question. -->
     <text x="1076" y="169" text-anchor="end" font-size="17" fill="#8a8d88">你</text>
     <rect x="590" y="183" width="486" height="86" rx="24" fill="url(#message)"/>
-    <text x="833" y="237" text-anchor="middle" font-size="31" font-weight="500" fill="#fffdf7">七天内有什么作业</text>
+    <text x="833" y="237" text-anchor="middle" font-size="31" font-weight="500" fill="#ffffff">七天内有什么作业</text>
 
     <!-- A plain-language service status, without tool names or technical output. -->
     <g transform="translate(106 308)">
-      <rect width="38" height="38" rx="12" fill="#eee7d5"/>
-      <path d="M19 8v22M8 19h22M11.2 11.2l15.6 15.6M11.2 26.8l15.6-15.6" stroke="#96773f" stroke-width="2.4" stroke-linecap="round"/>
+      <rect width="38" height="38" rx="12" fill="#e8eef7"/>
+      <path d="M19 8v22M8 19h22M11.2 11.2l15.6 15.6M11.2 26.8l15.6-15.6" stroke="#235da0" stroke-width="2.4" stroke-linecap="round"/>
     </g>
     <rect x="158" y="301" width="414" height="53" rx="16" fill="#edf2f5"/>
     <circle cx="183" cy="327.5" r="9" fill="#6c8b7a"/>
     <path d="m179 327 2.7 2.7 5.1-5.1" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="203" y="335" font-size="20" fill="#557087">已通过 MCP 读取课程作业</text>
-    <path d="M125 357v18" stroke="#d7d4c9" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 5"/>
+    <path d="M125 357v18" stroke="#cbd2dc" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 5"/>
 
     <!-- A readable reply with three fictional assignments. -->
-    <rect x="106" y="393" width="970" height="358" rx="24" fill="#fff" stroke="#e9e6dd" filter="url(#reply-shadow)"/>
+    <rect x="106" y="393" width="970" height="358" rx="24" fill="#fff" stroke="#e9ecf0" filter="url(#reply-shadow)"/>
     <text x="140" y="444" font-size="29" font-weight="600">未来七天，有 3 项作业要交</text>
     <text x="140" y="478" font-size="18" fill="#81877f">按截止时间排好了，先看最近的一项。</text>
 
-    <path d="M140 499H1042" stroke="#edeae2"/>
+    <path d="M140 499H1042" stroke="#f5f6f8"/>
     <g>
-      <rect x="140" y="519" width="42" height="42" rx="13" fill="#f2e9d4"/>
-      <text x="161" y="547" text-anchor="middle" font-size="21" font-weight="600" fill="#95733b">1</text>
+      <rect x="140" y="519" width="42" height="42" rx="13" fill="#e8eef7"/>
+      <text x="161" y="547" text-anchor="middle" font-size="21" font-weight="600" fill="#235da0">1</text>
       <text x="202" y="536" font-size="21" font-weight="600">数据科学基础</text>
       <text x="202" y="566" font-size="20" fill="#7d857d">作业 02 · 数据清洗练习</text>
-      <rect x="914" y="521" width="128" height="44" rx="14" fill="#f5e9d2"/>
-      <text x="978" y="550" text-anchor="middle" font-size="20" font-weight="500" fill="#8e6835">明晚截止</text>
+      <rect x="914" y="521" width="128" height="44" rx="14" fill="#e8eef7"/>
+      <text x="978" y="550" text-anchor="middle" font-size="20" font-weight="500" fill="#235da0">明晚截止</text>
     </g>
 
-    <path d="M202 587H1042" stroke="#f0eee7"/>
+    <path d="M202 587H1042" stroke="#f5f6f8"/>
     <g>
       <rect x="140" y="601" width="42" height="42" rx="13" fill="#edf2f5"/>
       <text x="161" y="629" text-anchor="middle" font-size="21" font-weight="600" fill="#54718b">2</text>
@@ -72,7 +72,7 @@
       <text x="978" y="632" text-anchor="middle" font-size="20" fill="#617485">3 天后截止</text>
     </g>
 
-    <path d="M202 669H1042" stroke="#f0eee7"/>
+    <path d="M202 669H1042" stroke="#f5f6f8"/>
     <g>
       <rect x="140" y="683" width="42" height="42" rx="13" fill="#edf2f5"/>
       <text x="161" y="711" text-anchor="middle" font-size="21" font-weight="600" fill="#54718b">3</text>

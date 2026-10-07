@@ -1489,8 +1489,8 @@ async function init() {
     if (p && p.phase !== 'done' && p.phase !== 'error') renderSyncProgress(p);
   }).catch(() => {});
 
-  let savedTheme = window.demoTheme || 'hkust';
-  try { savedTheme = window.demoTheme || localStorage.getItem('canvas-demo-theme') || 'hkust'; } catch (e) { /* 忽略 */ }
+  let savedTheme = window.demoTheme || 'default';
+  try { savedTheme = window.demoTheme || localStorage.getItem('canvas-demo-theme') || 'default'; } catch (e) { /* 忽略 */ }
   applyTheme(savedTheme);
   $('#theme-select').onchange = () => applyTheme($('#theme-select').value);
 

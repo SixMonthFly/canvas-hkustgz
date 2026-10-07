@@ -15,7 +15,7 @@
   if (storyMode) document.documentElement.dataset.storyMode = 'true';
   const requestedTheme = params.get('theme');
   window.demoTheme = ['hkust', 'claude', 'chatgpt', 'default'].includes(requestedTheme)
-    ? requestedTheme : 'hkust';
+    ? requestedTheme : 'default';
   document.body.dataset.theme = window.demoTheme;
 
   const now = new Date();

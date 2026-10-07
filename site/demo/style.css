@@ -25,38 +25,36 @@
    2. 语义色各有三元组:--x 作文本压在面板上、--x-tint 是徽标实底、--x-strong 是
       徽标底上的文字。tint 必须是实色而非 rgba,否则叠在不同面板上结果不可控。
 */
-/* 默认:深色 */
+/* 当前客户端的基础白色外观。 */
 body {
-  --bg: #10141c;
-  --header-bg: #171d29; --header-text: #e2e8f0; --header-border: var(--border);
-  --nav-bg: #141925; --nav-text: #aab6c8;
-  --panel: #171d29; --panel2: #141925; --panel3: #131826;
-  --border: #263043; --border-soft: #1e2636; --row-line: #1a2130;
-  --hover: #1a2233;
-  --text: #e2e8f0; --text-soft: #c3cede; --text-dim: #8a97ab; --text-mute: #7f899a;
-  --accent: #2f6fed; --accent-hover: #1f5ad6; --accent-text: #4f85f0; --accent-dim: #233350;
-  --accent-disabled: #23408f; --accent-contrast: #fff;
-  --btn: #232c3d; --btn-hover: #2c3850; --btn-border: transparent;
-  --ok: #4fd08f; --ok-tint: #1b3631; --ok-strong: #4fd08f;
-  --warn: #e5c453; --warn-tint: #363426; --warn-strong: #e5c453;
-  --bad: #f27d8d; --bad-tint: #392730; --bad-strong: #f27d8d;
-  --info: #6fa8ff; --info-tint: #212f45; --info-strong: #6fa8ff;
-  --paper-bg: #fff; --paper-text: #1f232b; --paper-link: #1a5fb4; --paper-border: #c8d0dc;
-  --font: "Segoe UI", "Microsoft YaHei", sans-serif;
-  --font-display: var(--font);
-  --font-mono: var(--font);
+  --bg: #ffffff;
+  --header-bg: #ffffff; --header-text: #20242a; --header-border: #dfe3e8;
+  --nav-bg: #f5f6f8; --nav-text: #505966;
+  --panel: #ffffff; --panel2: #f5f6f8; --panel3: #f7f8fa;
+  --border: #dfe3e8; --border-soft: #e9ecf0; --row-line: #e9ecf0;
+  --hover: #edf0f4; --active: #e6ebf2;
+  --text: #20242a; --text-soft: #37404c; --text-dim: #505966; --text-mute: #697383;
+  --accent: #235da0; --accent-hover: #194b85; --accent-text: #235da0; --accent-dim: #e8eef7;
+  --accent-disabled: #b7c9df; --accent-contrast: #ffffff;
+  --btn: #ffffff; --btn-hover: #edf0f4; --btn-border: #cbd2dc;
+  --ok: #2d733b; --ok-tint: #e4eee6; --ok-strong: #286834;
+  --warn: #955208; --warn-tint: #f5eadb; --warn-strong: #8b4a05;
+  --bad: #b42e36; --bad-tint: #f7e4e6; --bad-strong: #a32930;
+  --info: #235da0; --info-tint: #e4ecf7; --info-strong: #1e548f;
+  --paper-bg: #ffffff; --paper-text: #1f232b; --paper-link: #1a5fb4; --paper-border: #cbd2dc;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: var(--font); --font-mono: var(--font);
   --font-num: Bahnschrift, "Segoe UI", "DIN Alternate", sans-serif;
   --radius-lg: 10px; --radius: 8px; --radius-sm: 6px;
   --btn-radius: 6px; --input-radius: 6px;
-  --input-bg: #10141c; --input-border: #2c3850;
-  --card-border: #263043;
-  --scrollbar: #2c3850; --scrollbar-hover: #3a4a66;
-  --shadow: none;
-  --overlay: rgba(4, 7, 13, .62);
-  --course-0: #6fa8ff; --course-0-tint: #1d2a42;  --course-1: #4fd1c5; --course-1-tint: #16312f;
-   --course-2: #f0c048; --course-2-tint: #342d1a;  --course-3: #f28bb5; --course-3-tint: #3a2231;
-   --course-4: #b39cff; --course-4-tint: #29243f;  --course-5: #6ee7a0; --course-5-tint: #18321f;
-   --course-6: #ff8a80; --course-6-tint: #3a2224;  --course-7: #67d4ea; --course-7-tint: #153440;
+  --input-bg: #ffffff; --input-border: #cbd2dc; --card-border: #dfe3e8;
+  --scrollbar: #cbd2dc; --scrollbar-hover: #a8b2c1;
+  --shadow: 0 1px 3px rgba(32, 36, 42, .06);
+  --overlay: rgba(20, 28, 40, .36);
+  --course-0: #235da0; --course-0-tint: #e4ecf7; --course-1: #087b72; --course-1-tint: #dff0ed;
+  --course-2: #a76308; --course-2-tint: #f8ecd8; --course-3: #ad3672; --course-3-tint: #f5e4ed;
+  --course-4: #7047a3; --course-4-tint: #ece5f5; --course-5: #327b41; --course-5-tint: #e1eee4;
+  --course-6: #b43236; --course-6-tint: #f7e4e5; --course-7: #26758a; --course-7-tint: #e0edf1;
 }
 
 /* ChatGPT 风格:纯白 + 浅灰侧栏 + 绿色点缀 + 药丸按钮 + 灰底圆角输入框 */

@@ -7,7 +7,7 @@ explicitly labelled as demonstration data.
 
 Serve `website/` with any static HTTP server and open:
 
-- `/demo/index.html` — actual HKUST theme and the 30-day calendar.
+- `/demo/index.html` — default white appearance and the 30-day calendar.
 - `/demo/index.html?course=1` — the four-board course overview.
 - `/demo/index.html?course=1&section=assignments` — assignment board.
 - `/demo/index.html?course=1&section=announcements` — announcement board.
@@ -65,3 +65,5 @@ These website changes are currently local preview work pending publication.
 
 The bundled Source Serif 4 font remains under its included SIL Open Font License.
 The marked vendor bundle and the renderer preserve their source notices.
+
+Default color and typography tokens were updated from the current client base appearance on 2026-10-07. Optional historical themes remain in this isolated demo.
