@@ -9,33 +9,15 @@ let selectedPlatform = /Windows|Win32|Win64/i.test([navigator.userAgentData?.pla
 const platforms = {
   mac: {
     name: 'Mac', arch: 'Apple Silicon', system: 'macOS 13+', format: L.t('DMG 安装包'), extension: '.dmg',
-    compatibility: 'macOS 13+ · Apple Silicon', eyebrow: L.t('开始使用 Mac 版'),
-    installCompatibility: L.t('适用于 macOS 13 及以上的 Apple Silicon Mac。\n安装后，使用学校账号登录 Canvas。'),
+    compatibility: 'macOS 13+ · Apple Silicon',
     packageNote: L.t('Intel 版暂未提供'), packageDetail: L.t('DMG · 尚未公证'),
-    noticeTitle: L.t('首次打开前，请留意'),
-    noticeCopy: L.t('当前版本尚未经过 Apple 公证，macOS 可能拦截首次启动。请先阅读下方说明，再决定是否安装。'),
     helpId: 'first-open', helpLabel: L.t('首次打开说明 ↗'),
-    steps: [
-      [L.t('下载 Mac 版'), L.t('获取适用于 M 系列芯片的\nDMG 安装包。'), '↓'],
-      [L.t('打开安装包'), L.t('双击下载的 DMG，\n打开安装窗口。'), '◫'],
-      [L.t('拖入 Applications'), L.t('将应用拖到「应用程序」，\n等待复制完成。'), '<span>C</span><b>→</b><span>A</span>'],
-      [L.t('开启新学期'), L.t('打开应用，点击「同步」，\n完成学校账号登录。'), '↗'],
-    ],
   },
   windows: {
     name: 'Windows', arch: 'x64', system: 'Windows 10/11', format: L.t('EXE 一键安装'), extension: '.exe',
-    compatibility: 'Windows 10/11 · x64', eyebrow: L.t('开始使用 Windows 版'),
-    installCompatibility: L.t('适用于 Windows 10/11 x64 电脑。\n一键安装后，使用学校账号登录 Canvas。'),
+    compatibility: 'Windows 10/11 · x64',
     packageNote: L.t('一键安装 · 当前用户'), packageDetail: L.t('EXE · 一键安装'),
-    noticeTitle: L.t('双击安装，准备就绪'),
-    noticeCopy: L.t('下载的是完整 EXE 安装包。双击后为当前用户一键安装，完成后自动启动；之后也可从桌面或开始菜单打开。'),
     helpId: 'windows-install', helpLabel: L.t('Windows 安装说明 ↗'),
-    steps: [
-      [L.t('下载 Windows 版'), L.t('获取完整 EXE 安装包，\n适用于 Windows x64。'), '↓'],
-      [L.t('双击，一键安装'), L.t('双击下载的 EXE，\n为当前用户完成安装。'), '◫'],
-      [L.t('安装后自动启动'), L.t('也可从桌面或开始菜单的\n快捷方式打开应用。'), '↗'],
-      [L.t('同步学校课程'), L.t('点击应用内的「同步」，\n完成学校账号登录。'), '✓'],
-    ],
   },
 };
 const heroDemo = document.querySelector('#hero-demo');
@@ -132,24 +114,10 @@ function renderPlatform() {
     ? `${pkg.filename}\nSHA-256\n${pkg.sha256}`
     : L.html`${platform.name} 安装包发布后显示 SHA-256。`;
   document.querySelector('#platform-package-note').textContent = platform.packageNote;
-  document.querySelector('[data-install-eyebrow]').textContent = platform.eyebrow;
-  document.querySelector('#install-compatibility').textContent = platform.installCompatibility;
-  document.querySelector('#install-notice-title').textContent = platform.noticeTitle;
-  document.querySelector('#install-notice-copy').textContent = platform.noticeCopy;
-  for (const id of ['install-notice-link', 'package-install-link']) {
-    const link = document.getElementById(id);
-    link.href = location.pathname + `#${platform.helpId}`;
-    link.dataset.expand = platform.helpId;
-  }
-  document.querySelector('#package-install-link').textContent = platform.helpLabel;
-  platform.steps.forEach(([title, description, symbol], index) => {
-    document.querySelector(`[data-install-title="${index}"]`).textContent = title;
-    document.querySelector(`[data-install-description="${index}"]`).textContent = description;
-    const icon = document.querySelector(`[data-install-symbol="${index}"]`);
-    // Symbols are fixed presentation strings above, never release metadata.
-    icon.innerHTML = symbol;
-    icon.classList.toggle('drag-symbol', selectedPlatform === 'mac' && index === 2);
-  });
+  const helpLink = document.querySelector('#package-install-link');
+  helpLink.href = location.pathname + `#${platform.helpId}`;
+  helpLink.dataset.expand = platform.helpId;
+  helpLink.textContent = platform.helpLabel;
 }
 document.querySelectorAll('[data-platform]').forEach(button => button.addEventListener('click', () => {
   if (!platforms[button.dataset.platform]) return;
