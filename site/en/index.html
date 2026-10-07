@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A desktop companion for Canvas across universities. Organize courses, assignments, announcements and files, with separate school sessions and optional plugins.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Canvas Manager · A little clarity. Every course.</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=bilingual-4.1.0">
+  <script src="locales.js?v=4.1.0" defer></script>
+  <script src="site.js?v=bilingual-4.1.0" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="en/#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="en/#" aria-label="Canvas Manager home"><img class="brand-mark" src="assets/favicon.svg" width="36" height="36" alt=""><span>Canvas <b>Manager</b></span><span class="dock-version">4.1</span></a>
+    <nav aria-label="Main navigation"><a href="en/#features">Features</a><a href="https://github.com/SixMonthFly/canvas-hkustgz" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+    <div class="dock-actions"><a class="language-link" href="./" lang="zh-CN" aria-label="切换为中文">中文</a>
+      <div class="dock-download"><a class="nav-download" data-download href="en/#download" aria-disabled="true"><span aria-hidden="true">↓</span><span data-download-nav>Download for Mac</span></a><button id="download-menu-toggle" type="button" aria-label="Choose a platform" aria-expanded="false" aria-controls="download-menu">⌄</button></div>
+    </div>
+    <div id="download-menu" class="download-menu" hidden><a data-direct-download="mac" href="en/#download"><span>macOS</span><small>Apple Silicon · macOS 13+</small></a><a data-direct-download="windows" href="en/#download"><span>Windows</span><small>x64 · Windows 10/11</small></a></div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">Your Canvas. All together.</p>
+          <h1 id="hero-title">A little clarity.<br><span class="accent-word">Every course.</span></h1>
+          <p class="hero-description">Wherever you study, give your courses a little room to breathe. <br>Bring your Canvas assignments, announcements and files to your desktop.</p>
+          <div class="hero-actions"><a class="button button-primary" href="en/#download">Download desktop <span aria-hidden="true">↓</span></a><button class="button button-secondary" data-open-preview>Try the demo <span aria-hidden="true">↗</span></button></div>
+          <p class="hero-footnote">macOS / Windows · Multiple campuses · Optional plugins</p>
+        </div>
+        <div class="product-stage">
+          <div class="product-window">
+            <div class="window-chrome"><div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div><span>Canvas Manager</span></div>
+            <div class="demo-viewport"><iframe id="hero-demo" src="demo/en.html" title="Canvas course overview with fictional demo courses" tabindex="-1" inert loading="eager"></iframe></div>
+          </div>
+          <p class="preview-caption">Default appearance · Fictional courses, including optional AI features</p>
+        </div>
+      </div>
+      <div class="hero-bottom wrap"><span>Less switching. More focus.</span><span>Scroll to see it in action <span aria-hidden="true">↓</span></span></div>
+    </section>
+
+    <section class="schools-section section wrap" id="schools" aria-labelledby="schools-title">
+      <div class="schools-heading"><p class="eyebrow dark-eyebrow">Built for more campuses</p><h2 id="schools-title">One familiar tool.<br>Your campus, connected.</h2><p>Choose your school. Sign in with your existing Canvas account.<br>Each school keeps its own courses and sign-in session.</p></div>
+      <ul class="school-list"><li><span>HKUST(GZ)</span>HKUST (Guangzhou)</li><li><span>HKUST</span>HKUST</li><li><span>CityUHK</span>City University of Hong Kong</li><li><span>NUS</span>National University of Singapore</li><li><span>SUSS</span>Singapore University of Social Sciences</li></ul>
+      <p class="school-status">Five Canvas endpoints are included. A NUS user has reported successful sign-in and normal operation. Account permissions and verification can vary by school.</p>
+    </section>
+
+    <section class="course-story" id="features" aria-labelledby="features-title">
+      <div class="story-intro wrap"><p class="eyebrow dark-eyebrow">Start with a sync</p><h2 id="features-title">Your day,<br>a little clearer.</h2><p>Follow your courses from sign-in to getting things done.</p></div>
+      <div class="story-layout wrap">
+        <div class="story-chapters">
+          <article class="story-chapter" data-story="sync" id="story-sync">
+            <div class="chapter-copy"><p class="chapter-label">First, sync</p><h3>Bring your courses home.</h3><p>Choose a language and school in the welcome guide, then sign in. Courses, assignments, announcements and files arrive together.</p><span class="chapter-note">School sign-in · Courses organized automatically</span></div>
+          </article>
+          <article class="story-chapter" data-story="home" id="story-home">
+            <div class="chapter-copy"><p class="chapter-label">All courses</p><h3>See the week ahead.</h3><p>Your next deadline, followed by the next 30 days. A color for each course and one calendar for everything due.</p><span class="chapter-note">Next deadline · 30-day calendar</span></div>
+          </article>
+          <article class="story-chapter" data-story="overview" id="story-overview">
+            <div class="chapter-copy"><p class="chapter-label">Inside a course</p><h3>Everything for that class.</h3><p>Assignments, announcements and files live on three boards. Enable the optional AI plugin for a course guide, too. Take a closer look.</p><span class="chapter-note">Three core boards · Optional AI</span></div>
+          </article>
+          <article class="story-chapter" data-story="assignments" id="story-assignments">
+            <div class="chapter-copy"><p class="chapter-label">Assignments</p><h3>Your next assignment starts here.</h3><p>Open an assignment to see what to do and when it is due. Need a starting point? AI can help you understand the requirements and plan the work.</p><span class="chapter-note">Read the requirements · Plan the steps</span></div>
+          </article>
+          <article class="story-chapter" data-story="announcements" id="story-announcements">
+            <div class="chapter-copy"><p class="chapter-label">Announcements</p><h3>Stay in the loop.</h3><p>Class arrangements and project updates, sorted by date. Find the announcement you need without searching through the whole course.</p><span class="chapter-note">Course updates · Full announcements</span></div>
+          </article>
+          <article class="story-chapter" data-story="files" id="story-files">
+            <div class="chapter-copy"><p class="chapter-label">Course files</p><h3>Ready for your next class.</h3><p>Lecture slides, readings and classroom files, organized by course. Download them together and keep them close.</p><span class="chapter-note">Organized by course · Batch downloads</span></div>
+          </article>
+          <article class="story-chapter" data-story="analysis" id="story-analysis">
+            <div class="chapter-copy"><p class="chapter-label">Course guide</p><h3>Find your direction.</h3><p>Let AI review course materials and outline the structure, grading and study suggestions. Start a new course knowing where to begin.</p><span class="chapter-note">Course overview · Study suggestions</span></div>
+          </article>
+        </div>
+        <div class="story-stage">
+          <div class="story-window"><div class="window-chrome"><div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div><span>Canvas Manager</span></div><div class="story-viewport"><iframe id="story-demo" src="demo/en.html?story=1" title="Scroll-driven application tour with fictional data" tabindex="-1" inert loading="eager"></iframe></div></div>
+          <div class="story-caption"><span id="story-caption">Bring your courses home.</span><span>Interface demo</span></div>
+          <div class="story-progress" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="widget-section section wrap" id="widgets" aria-labelledby="widget-title">
+      <div><p class="eyebrow dark-eyebrow">4.1 · Make it yours</p><h2 id="widget-title">Due this week,<br>right on your desktop.</h2><p>Native Mac widgets show the next seven days of assignments in deadline order. Choose small, medium or large, and click to return to the app. Data comes from your latest sync.</p><p class="widget-guide">Enable Mac system widgets in Settings → Plugins. Then right-click your desktop, choose Edit Widgets and search for Canvas. Requires macOS 14 or later.</p><h3>Add what you need.</h3><p>AI is off by default; enable it in Settings → Plugins. Start with the clean default appearance and install themes when you want them. Existing themes are kept. Uninstalling preserves courses, settings and reports; reinstall from the bundled copy.</p></div>
+      <figure><img src="assets/widget-preview-en.svg" width="720" height="540" alt="Illustration of a Mac widget with three fictional assignments due in the next seven days."><figcaption>Fictional data and layout · macOS schedules widget refreshes</figcaption></figure>
+    </section>
+
+    <section class="ai-story" id="ai" aria-labelledby="ai-title">
+      <div class="ai-intro wrap"><p class="eyebrow dark-eyebrow">Another way to stay on top</p><h2 id="ai-title">Ask your AI.<br>Know what is due.</h2><p>Connect the separate MCP service to a compatible AI such as Codex,<br>and ask about courses and assignments without copying everything over.</p></div>
+      <div class="ai-layout wrap">
+        <div class="ai-chapters">
+          <article data-ai-step="0" id="ai-question"><div><p class="chapter-label">Just ask</p><h3>“What is due this week?”</h3><p>Ask naturally, just as you would in a conversation.</p></div></article>
+          <article data-ai-step="1" id="ai-query"><div><p class="chapter-label">AI looks it up</p><h3>Your courses,<br>within reach.</h3><p>Through MCP, your AI reads the most recently synced course information and finds the assignments coming up.</p></div></article>
+          <article data-ai-step="2" id="ai-answer"><div><p class="chapter-label">Back in your conversation</p><h3>Know what<br>to work on next.</h3><p>Courses and assignments, ordered by deadline. Want to understand the requirements? Just keep asking.</p></div></article>
+        </div>
+        <figure class="ai-figure"><div class="ai-picture"><img src="assets/ai-homework-en.svg" width="1200" height="850" alt="Illustrated MCP conversation: a user asks what is due in seven days and receives three assignments and deadlines."></div><figcaption>Fictional conversation · One-time setup · Based on the latest sync</figcaption></figure>
+      </div>
+      <div class="ai-setup wrap"><details><summary>How do I connect my AI?<span aria-hidden="true">+</span></summary><div class="answer"><p>Install Canvas Manager, sign in and sync your courses. Follow the MCP connection guide once, then connect the service to a compatible AI to query your courses in chat.</p><p>The connection has been tested with Codex. Other AI tools need custom MCP support. Queries read your local course cache; keep the desktop app running when a fresh sync is needed.</p><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/blob/master/mcp-server/README.md" target="_blank" rel="noopener noreferrer">Read the connection guide ↗</a></div></details></div>
+    </section>
+
+    <section class="install-section section" id="install" aria-labelledby="install-title"><div class="wrap">
+      <div class="install-heading reveal"><div><div class="eyebrow dark-eyebrow" data-install-eyebrow>Get started</div><h2 id="install-title">A few steps to your desktop.</h2></div><p id="install-compatibility">For Apple Silicon Macs running macOS 13 or later.<br>After installation, sign in with your school account.</p></div>
+      <ol class="install-steps reveal"><li><span class="step-index">01</span><div class="step-symbol" data-install-symbol="0" aria-hidden="true">↓</div><h3 data-install-title="0">Download for Mac</h3><p data-install-description="0">Get the DMG installer for<br>Apple Silicon Macs.</p></li><li><span class="step-index">02</span><div class="step-symbol" data-install-symbol="1" aria-hidden="true">◫</div><h3 data-install-title="1">Open the installer</h3><p data-install-description="1">Double-click your downloaded DMG<br>to open the installation window.</p></li><li><span class="step-index">03</span><div class="step-symbol drag-symbol" data-install-symbol="2" aria-hidden="true"><span>C</span><b>→</b><span>A</span></div><h3 data-install-title="2">Drag to Applications</h3><p data-install-description="2">Drag the app into Applications,<br>then wait for the copy to finish.</p></li><li><span class="step-index">04</span><div class="step-symbol" data-install-symbol="3" aria-hidden="true">↗</div><h3 data-install-title="3">Start your semester</h3><p data-install-description="3">Open the app and select Sync,<br>then sign in with your school account.</p></li></ol>
+      <div class="install-notice reveal"><span class="notice-icon" aria-hidden="true">i</span><p><strong id="install-notice-title">Before you open it</strong><br><span id="install-notice-copy">This version is not notarized by Apple. macOS may block the first launch. Read the instructions below before installing.</span></p><a id="install-notice-link" href="en/#first-open" data-expand="first-open">Read the guide <span aria-hidden="true">↗</span></a></div>
+    </div></section>
+
+    <section class="faq-section section wrap" id="faq" aria-labelledby="faq-title"><div class="faq-intro reveal"><div class="eyebrow dark-eyebrow">Good to know</div><h2 id="faq-title">Before you start,<br>a few answers.</h2><p>Compatibility, sign-in and your data.</p></div><div class="faq-list reveal">
+      <details><summary>Does it support my school?<span aria-hidden="true">+</span></summary><div class="answer">Canvas endpoints are included for HKUST (Guangzhou), HKUST, CityUHK, NUS and SUSS. Version 4.1 lets you select a school and Chinese or English in the welcome guide or settings. Sign-in, MFA, course access and downloads may vary by account. Other schools and learning platforms are not currently promised.</div></details>
+      <details><summary>Will it run on my Mac?<span aria-hidden="true">+</span></summary><div class="answer">The Apple Silicon build supports M-series chips such as M1, M2, M3 and M4. Check your chip under Apple menu → About This Mac. Requires macOS 13 or later. An Intel Mac build is not currently available.</div></details>
+      <details id="windows-install"><summary>How do I install it on Windows?<span aria-hidden="true">+</span></summary><div class="answer">Download the complete EXE installer for Windows 10/11 x64 and double-click it. It installs for your current user and opens automatically. You can then launch it from the desktop or Start menu. Select Sync and sign in with your school account. The installer is unsigned, so Windows may display a first-run warning.</div></details>
+      <details id="first-open"><summary>What if macOS cannot verify the developer?<span aria-hidden="true">+</span></summary><div class="answer">This build is locally signed and has not been signed with an Apple Developer certificate or notarized. After verifying the download source and attempting to open the app, check System Settings → Privacy &amp; Security for an Open Anyway option. The exact message depends on your macOS version.<br><br>If macOS specifically reports malware or a damaged file, stop and report the issue. For more information, see <a href="https://support.apple.com/zh-cn/102445" target="_blank" rel="noopener noreferrer">Apple&#x27;s guide to opening apps safely ↗</a>。</div></details>
+      <details><summary>Do I need another account?<span aria-hidden="true">+</span></summary><div class="answer">No separate account is needed. Select Sync and sign in through your school&#x27;s login page. Your school account must have access to the relevant Canvas courses.</div></details>
+      <details><summary>How are my data and AI requests handled?<span aria-hidden="true">+</span></summary><div class="answer">Course caches, downloaded files and settings stay on your computer. Sync connects to your school&#x27;s Canvas. If you use AI features, the relevant course or assignment content is sent to your selected AI provider. AI is off by default. Enable it and review provider settings under Settings → Plugins.</div></details>
+      <details><summary>Is this an official school or Canvas product?<span aria-hidden="true">+</span></summary><div class="answer">Canvas Manager is an independent tool for university Canvas users. It is not an official product of any school or Instructure Canvas. Your school&#x27;s Canvas remains the source of truth. For help, visit the <a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/issues" target="_blank" rel="noopener noreferrer">project feedback page ↗</a>。</div></details>
+    </div></section>
+
+    <section class="download-section" id="download" aria-labelledby="download-title"><div class="wrap download-inner"><div class="download-copy"><div class="eyebrow"><span class="status-dot"></span> Now, your courses</div><h2 id="download-title">Ready for<br>your next class.</h2><p>Choose the version for your Mac or Windows PC.<br>One companion. Two languages. Your campus.</p><button class="text-button" data-open-preview>Or try it for yourself ↗</button></div><div class="download-panel"><div class="platform-choice panel-platform-choice"><span class="platform-caption">Choose your system</span><div class="platform-switch" role="group" aria-label="Download platform"><button type="button" data-platform="mac" aria-pressed="true">Mac</button><button type="button" data-platform="windows" aria-pressed="false">Windows</button></div></div><div class="download-app"><img src="assets/favicon.svg" width="58" height="58" alt=""><div><strong>Canvas Manager</strong><span data-platform-compatibility>macOS 13+ · Apple Silicon</span></div><span class="version-pill" data-version>v4.1.0</span></div><a class="button button-gold download-wide" data-download href="en/#download" aria-disabled="true"><span data-download-label>Download for Mac</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a><noscript><p class="package-detail">Enable JavaScript to view download details, or go directly to the<a href="https://github.com/SixMonthFly/canvas-hkustgz/releases" target="_blank" rel="noopener noreferrer">release downloads ↗</a>。</p></noscript><p class="release-scope">4.1 · Multiple schools · Chinese / English · Welcome guide</p><p class="package-detail" id="package-detail" role="status" aria-live="polite">Loading Mac installer details…</p><div class="package-line"><span id="platform-package-note">Intel build not currently available</span><a id="package-install-link" href="en/#first-open" data-expand="first-open">First launch guide ↗</a></div><details class="checksum"><summary>Verify your download</summary><code id="checksum-value">SHA-256 appears when the installer is available.</code></details></div></div></section>
+  </main>
+  <footer class="site-footer wrap"><div><a class="brand footer-brand" href="en/#"><img class="brand-mark" src="assets/favicon.svg" width="36" height="36" alt=""><span>Canvas <b>Manager</b></span></a><p>A little clarity. Every course.</p></div><div class="footer-links"><a href="https://github.com/SixMonthFly/canvas-hkustgz" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas" target="_blank" rel="noopener noreferrer">App source ↗</a><a href="https://gitee.com/xxouyang123/hkustgz_diy_canvas/issues" target="_blank" rel="noopener noreferrer">Report an issue ↗</a><span>Independent tool · Not affiliated with any school or Canvas</span></div></footer>
+  <dialog id="preview-dialog" aria-labelledby="preview-title"><div class="dialog-heading"><div><strong id="preview-title">Canvas Manager · Interface demo</strong><span>Fictional data. No account or AI connection. Scroll horizontally on smaller screens.</span></div><button id="close-preview" aria-label="Close demo">✕</button></div><iframe id="large-demo" title="Interactive Canvas Manager demo"></iframe></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

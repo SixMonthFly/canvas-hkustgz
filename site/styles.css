@@ -59,3 +59,64 @@
  .download-copy h2{font-size:40px}.download-panel{padding:22px}.download-app{gap:10px;flex-wrap:wrap}.download-app strong{font-size:16px}
  .brand b{margin-left:1px}.site-header .brand{gap:7px}.nav-download{padding:5px 8px}.download-app>img{width:44px;height:44px}
 }
+
+/* A persistent glass Dock, with download actions within reach at every depth. */
+.site-header{position:fixed;inset:12px 0 auto;width:min(1180px,calc(100% - 40px));height:64px;margin:auto;padding:8px 10px 8px 20px;border:1px solid #ffffffc9;border-radius:999px;background:#f3f5f7c9;backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);box-shadow:0 2px 3px #192b4205,0 10px 40px #1d304a0a,inset 0 0 0 1px #18243a08;z-index:60;transition:background .4s,box-shadow .4s,transform .4s}
+.site-header.is-scrolled{background:#eef1f3db;box-shadow:0 12px 45px #1d304a15}
+.site-header .brand{gap:10px;font-size:18px;color:#252c36}
+.site-header .brand b{font-size:15px;color:#5e6876}
+.dock-version{border:1px solid #d0d5dd;border-radius:7px;font-size:10px;font-weight:500;padding:3px 7px;letter-spacing:.05em;color:#6d7785}
+.site-header nav{margin-left:auto;margin-right:22px;gap:24px;color:#5d6572}
+.site-header a:hover{color:#377ce6}
+.dock-actions{display:flex;gap:14px;align-items:center}
+.language-link{font-size:12px;color:#5e6876;padding:8px 4px;white-space:nowrap}
+.dock-download{display:flex;align-items:center;background:#fff;border:1px solid #dfe3e9;border-radius:999px;box-shadow:0 2px 4px #1e2f4206}
+.site-header .nav-download{display:flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:0;background:none;font-size:14px;font-weight:550;color:#28303b;white-space:nowrap}
+.site-header .nav-download>span:last-child{margin:0;color:inherit}
+#download-menu-toggle{width:34px;height:28px;border:0;border-left:1px solid #e1e5e9;background:none;color:#4d5867;margin-right:6px;cursor:pointer;font-size:18px}
+.download-menu{position:absolute;right:8px;top:calc(100% + 10px);width:270px;border-radius:20px;padding:8px;background:#fffffff2;backdrop-filter:blur(20px);border:1px solid #e1e6ed;box-shadow:0 18px 65px #17253922}
+.download-menu[hidden]{display:none}
+.download-menu a{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;font-size:15px;color:#263245}
+.download-menu a:hover{background:#edf3ff}.download-menu small{font-size:11px;color:#798391}
+.hero-inner{padding-top:160px}
+html{scroll-padding-top:100px}
+.story-stage,.ai-figure{top:max(94px,var(--stage-top))}
+.story-chapter,.ai-chapters article{scroll-margin-top:110px}
+.hero{background:radial-gradient(ellipse at 50% 57%,#e5edfa99,transparent 57%),#fafbfc}
+.product-stage{perspective:1600px;transform-style:preserve-3d}
+.product-window{transform:rotateX(var(--hero-tilt,5deg)) translateY(var(--hero-lift,0px)) scale(var(--hero-scale,.98));transform-origin:center top;will-change:transform;border-radius:18px;box-shadow:0 50px 100px -32px #40537342,0 8px 22px #1025440c}
+.story-window{box-shadow:0 32px 80px -22px #2b46682b;transition:box-shadow .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.story-stage[data-scene="assignments"] .story-window{transform:translateY(-5px)}
+.story-stage[data-scene="files"] .story-window{transform:translateY(3px)}
+.story-viewport iframe{transition:opacity .28s,filter .28s;filter:blur(0)}
+.story-viewport iframe.is-switching{opacity:.12;filter:blur(4px)}
+.motion .school-list li{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--school-index,0)*70ms)}
+.motion .school-list.visible li{opacity:1;transform:none}
+.motion .reveal{transition:opacity .8s,transform 1s cubic-bezier(.2,.8,.2,1);transform:translateY(32px)}
+.motion .reveal.visible{transform:none}
+.hero-copy .eyebrow,.hero-copy h1,.hero-description,.hero-actions,.hero-footnote{animation:hero-arrive .9s cubic-bezier(.2,.8,.2,1) both}
+.hero-copy h1{animation-delay:.08s}.hero-description{animation-delay:.17s}.hero-actions{animation-delay:.25s}.hero-footnote{animation-delay:.32s}
+.product-stage{animation:product-arrive 1.3s .2s cubic-bezier(.16,1,.3,1) both}
+@keyframes hero-arrive{from{opacity:0;transform:translateY(24px);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes product-arrive{from{opacity:0;transform:translateY(75px) scale(.94)}to{opacity:1;transform:none}}
+html[lang=en] .hero-copy h1{font-size:clamp(50px,6.2vw,86px);line-height:1.08}
+html[lang=en] h2{letter-spacing:-.045em}
+html[lang=en] .chapter-copy h3{font-size:34px;line-height:1.15}
+html[lang=en] .school-list li{line-height:1.5}
+@media(max-width:800px){
+ .site-header{inset:10px 0 auto;width:calc(100% - 24px);height:58px;padding-left:12px}
+ .site-header nav{display:none}.dock-actions{gap:10px}.dock-version{display:none}
+ .site-header .brand b{display:none}.site-header .brand{font-size:16px}
+ .site-header .brand-mark{width:30px;height:30px}
+ .site-header .nav-download{padding:0 11px;font-size:12px;min-height:38px;gap:5px}
+ .hero-inner{padding-top:130px}.story-stage,.ai-figure{top:82px}
+ html[lang=en] .hero-copy h1{font-size:clamp(44px,9vw,70px)}
+}
+@media(max-width:380px){.site-header{width:calc(100% - 16px);padding-left:9px}.site-header .brand{font-size:14px;gap:6px}.site-header .brand-mark{width:25px;height:25px}.dock-actions{gap:6px}.site-header .nav-download{padding:0 8px;font-size:11px}#download-menu-toggle{width:25px}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .hero-copy .eyebrow,.hero-copy h1,.hero-description,.hero-actions,.hero-footnote,.product-stage{animation:none}
+ .product-window,.story-stage .story-window{transform:none;will-change:auto}
+ .story-viewport iframe{transition:none;filter:none}
+ .motion .school-list li{opacity:1;transform:none;transition:none}
+}

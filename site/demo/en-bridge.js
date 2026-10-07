@@ -27,31 +27,31 @@
   };
 
   const demoCourses = [
-    { id: 1, code: 'ROAS5120 (L01)', name: '形式化验证与控制 · Formal Verification and Control' },
-    { id: 2, code: 'DSAA5001 (L01)', name: '数据科学基础 · Foundations of Data Science' },
-    { id: 3, code: 'PLED5001 (T01)', name: '学术英语交流 · Communicating Research in English' },
-    { id: 4, code: 'AIAA5001 (L01)', name: '人工智能导论 · Introduction to Artificial Intelligence' },
-    { id: 5, code: 'IOTA5002 (L01)', name: '物联网系统 · Internet of Things Systems' },
+    { id: 1, code: 'ROAS5120 (L01)', name: "Formal Verification and Control" },
+    { id: 2, code: 'DSAA5001 (L01)', name: "Foundations of Data Science" },
+    { id: 3, code: 'PLED5001 (T01)', name: "Communicating Research in English" },
+    { id: 4, code: 'AIAA5001 (L01)', name: "Introduction to Artificial Intelligence" },
+    { id: 5, code: 'IOTA5002 (L01)', name: "Internet of Things Systems" },
   ];
   const plans = [
     [
-      ['Problem Set 02 · 状态空间', 1], ['Lab 03 · 控制器设计', 7],
-      ['Project Proposal', 14], ['Problem Set 03 · 稳定性', 22],
+      ["Problem Set 02 · State space", 1], ["Lab 03 · Controller design", 7],
+      ['Project Proposal', 14], ["Problem Set 03 · Stability", 22],
     ],
     [
-      ['作业 03 · 回归与分类', 3], ['数据探索报告', 10],
-      ['小组项目 · 阶段汇报', 18], ['作业 04 · 模型评估', 27],
+      ["Assignment 03 · Regression and classification", 3], ["Exploratory data report", 10],
+      ["Group project · Progress report", 18], ["Assignment 04 · Model evaluation", 27],
     ],
     [
       ['Research Abstract', 5], ['Literature Review', 12],
       ['3-minute Presentation', 20],
     ],
     [
-      ['Lab 02 · 搜索算法', 4], ['Reading Notes', 11],
-      ['作业 02 · 神经网络', 17], ['Project Milestone', 25],
+      ["Lab 02 · Search algorithms", 4], ['Reading Notes', 11],
+      ["Assignment 02 · Neural networks", 17], ['Project Milestone', 25],
     ],
     [
-      ['传感器实验报告', 6], ['系统设计草案', 15], ['Demo Day · 项目展示', 24],
+      ["Sensor lab report", 6], ["System design proposal", 15], ["Demo Day · Project showcase", 24],
     ],
   ];
   const byCourse = {};
@@ -69,16 +69,16 @@
       due_at: dateAt(offset),
       points: index === 2 ? 30 : 20,
       url: 'https://demo.invalid/assignment',
-      description: `<h2>${name}</h2><p>这是用于展示课程管理界面的虚构作业。</p><p>请结合本周课程内容，完成问题分析、方法设计与结果讨论。在报告中清楚说明你的思路，并给出必要的实验或推导过程。</p><h3>提交要求</h3><ul><li>使用 PDF 格式，保持结构清晰、图表可读。</li><li>说明方法选择与结果，标注引用来源。</li><li>提交前核对文件名和截止时间。</li></ul><p><strong>提示：</strong>此处内容仅作界面演示，不代表学校课程安排或真实作业要求。</p>`,
+      description: `<h2>${name}</h2><p>This is a fictional assignment for the interface demo.</p><p>Use this week's course material to analyze the problem, design a method and discuss your results. Explain your reasoning, experiments and derivations clearly.</p><h3>Submission requirements</h3><ul><li>Use PDF format with clear structure and readable figures.</li><li>Explain your methods and results, and cite your sources.</li><li>Check the filename and deadline before submitting.</li></ul><p><strong>Note:</strong>These fictional instructions do not represent any real course requirements.</p>`,
     }));
     byCourse[cid].push({
       id: cid * 100 + 90,
-      name: 'Week 01 · 课程导读',
+      name: "Week 01 · Course introduction",
       published: true,
       due_at: dateAt(-3),
       points: 10,
       sub: { state: 'graded', score: 10, submitted_at: dateAt(-4) },
-      description: '<p>课程导读与学习目标梳理。此为已完成作业的演示数据。</p>',
+      description: "<p>Course introduction and learning objectives. This is fictional completed-assignment data.</p>",
       url: 'https://demo.invalid/assignment',
     });
     filesBy[cid] = {
@@ -88,32 +88,41 @@
         { id: cid * 1000 + 3, filename: 'Lecture_03_Methods.pdf', size: 4194304, type: 'application/pdf', created_at: dateAt(-3) },
         { id: cid * 1000 + 4, filename: 'Week_04_Reading_Notes.pdf', size: 1363149, type: 'application/pdf', created_at: dateAt(-1) },
       ],
-      links: [{ title: '课程阅读材料与补充资源', url: 'https://demo.invalid/reading' }],
+      links: [{ title: "Readings and additional resources", url: 'https://demo.invalid/reading' }],
     };
     annBy[cid] = [
       {
         id: cid * 10 + 1,
-        title: '本周课程安排与阅读材料',
+        title: "This week's classes and readings",
         posted_at: dateAt(-1, 9, 0),
         url: 'https://demo.invalid/announcement',
-        message: '<p>本周我们将讨论核心概念与实际应用。请提前阅读 Lecture 03，并带着一个具体问题参与课堂讨论。</p><p>课程资料已整理至「课件」，可以按需查看。</p><p><em>演示公告：内容为虚构，不代表真实教学安排。</em></p>',
+        message: "<p>This week we will discuss core concepts and practical applications. Read Lecture 03 in advance and bring a specific question to the discussion.</p><p>Materials are available on the Course files board.</p><p><em>Fictional announcement for demonstration only.</em></p>",
       },
       {
         id: cid * 10 + 2,
-        title: '小组项目：从一个好问题开始',
+        title: "Group project: start with a good question",
         posted_at: dateAt(-4, 10, 0),
         url: 'https://demo.invalid/announcement',
-        message: '<p>请在下次讨论前准备一页项目草案，说明研究问题、拟采用的方法与预期成果。</p><p>此公告仅用于产品界面展示。</p>',
+        message: "<p>Prepare a one-page proposal describing your research question, methods and expected outcomes before the next discussion.</p><p>This announcement is for demonstration only.</p>",
       },
     ];
     reports[cid] = {
       generatedAt: dateAt(-1, 16, 30),
-      report: `## ${code} 学习路线（演示）\n\n先理解基础概念，再通过每周练习验证理解，最后把方法应用到一个清晰的问题上。\n\n### 本周重点\n- 阅读 Lecture 03，梳理核心假设。\n- 完成当前作业，记录未解决的问题。\n- 为小组项目准备一页研究计划。\n\n> 这是预先编写的虚构示例，未调用 AI，也不代表真实课程要求。`,
+      report: `## ${code} Study guide (demo)
+
+Start with the core concepts, test your understanding through weekly exercises, then apply the methods to a clear problem.
+
+### This week
+- Read Lecture 03 and identify the key assumptions.
+- Complete the current assignment and note unresolved questions.
+- Prepare a one-page plan for the group project.
+
+> A prewritten fictional example. No AI is called and this is not a real course requirement.`,
     };
   });
 
   const data = { courses: demoCourses, byCourse, filesBy, annBy, syncedAt: dateAt(0, 9, 41) };
-  const demoMessage = '这是本地界面演示。请在 Mac 应用中使用同步、AI 与课件下载功能。';
+  const demoMessage = "This is an interface demo. Use the desktop app to sync, use AI and download course files.";
   let messageTimer;
   function showDemoMessage(message = demoMessage) {
     const target = document.querySelector('#toast');
@@ -124,11 +133,11 @@
     clearTimeout(messageTimer);
     messageTimer = setTimeout(() => target.classList.add('hidden'), 4500);
   }
-  const unavailable = async () => { throw new Error('界面演示不执行此操作，请在 Mac 应用中使用。'); };
+  const unavailable = async () => { throw new Error("This action is available in the desktop app."); };
   const noOp = () => {};
 
   window.api = Object.freeze({
-    aiPresets: async () => ({ custom: { label: '界面演示 · 不连接 AI' } }),
+    aiPresets: async () => ({ custom: { label: "Interface demo · No AI connection" } }),
     syncProgressCurrent: async () => null,
     onSyncProgress: noOp, onAnalysisProgress: noOp, onOpenAssignment: noOp,
     onDataUpdated: noOp, onUpdateProgress: noOp,
@@ -188,16 +197,7 @@
     overlay.className = 'story-sync hidden';
     overlay.setAttribute('role', 'status');
     overlay.innerHTML = `
-      <div class="story-sync-card">
-        <div class="story-sync-caption"><span class="story-sync-dot"></span> 同步过程演示</div>
-        <div class="story-sync-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 5 11v12c0 8 15 14 15 14s15-6 15-14V11L20 4Z"/><path d="m13 20 5 5 10-11"/></svg></div>
-        <h2>登录一次，课程就到齐了。</h2>
-        <p>在应用中完成学校账号登录，<br>课程、作业和资料会一起同步。</p>
-        <div class="story-sync-login"><span class="story-sync-check" aria-hidden="true">✓</span><span>学校账号登录完成</span><span class="story-sync-state">演示</span></div>
-        <div class="story-sync-progress"><span>正在整理课程资料</span><span>5 门课程</span></div>
-        <div class="story-sync-track" aria-hidden="true"><span></span></div>
-        <small>虚构课程数据 · 此处无需登录</small>
-      </div>`;
+<div class="story-sync-card"><div class="story-sync-caption"><span class="story-sync-dot"></span> Sync demonstration</div><div class="story-sync-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 5 11v12c0 8 15 14 15 14s15-6 15-14V11L20 4Z"/><path d="m13 20 5 5 10-11"/></svg></div><h2>Sign in. Settle in.</h2><p>Sign in with your school account.<br>Your courses, assignments and files arrive together.</p><div class="story-sync-login"><span class="story-sync-check" aria-hidden="true">✓</span><span>School account connected</span><span class="story-sync-state">Demo</span></div><div class="story-sync-progress"><span>Organizing course materials</span><span>5 courses</span></div><div class="story-sync-track" aria-hidden="true"><span></span></div><small>Fictional data · No sign-in required here</small></div>`;
     document.body.appendChild(overlay);
     return overlay;
   }
