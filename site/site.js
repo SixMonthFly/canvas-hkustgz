@@ -369,3 +369,20 @@ if ('IntersectionObserver' in window) {
   });
 }
 updateScrollMotion();
+
+const previewCards = [...document.querySelectorAll('.motion-card')];
+for (const card of previewCards) {
+  const button = card.querySelector('.preview-pause');
+  button.addEventListener('click', () => {
+    const paused = card.classList.toggle('is-paused');
+    button.setAttribute('aria-pressed', String(paused));
+    button.setAttribute('aria-label', document.documentElement.lang === 'en' ? (paused ? 'Play animation' : 'Pause animation') : (paused ? '播放动画' : '暂停动画'));
+    button.textContent = paused ? '▷' : 'Ⅱ';
+  });
+}
+if ('IntersectionObserver' in window) {
+  const previews = new IntersectionObserver(entries => {
+    for (const entry of entries) entry.target.classList.toggle('is-playing', entry.isIntersecting);
+  }, { threshold: .15 });
+  previewCards.forEach(card => previews.observe(card));
+} else { previewCards.forEach(card => card.classList.add('is-playing')); }
