@@ -27,11 +27,11 @@
   };
 
   const demoCourses = [
-    { id: 1, code: 'ROAS5120 (L01)', name: "Formal Verification and Control" },
-    { id: 2, code: 'DSAA5001 (L01)', name: "Foundations of Data Science" },
-    { id: 3, code: 'PLED5001 (T01)', name: "Communicating Research in English" },
-    { id: 4, code: 'AIAA5001 (L01)', name: "Introduction to Artificial Intelligence" },
-    { id: 5, code: 'IOTA5002 (L01)', name: "Internet of Things Systems" },
+    { id: 1, code: 'MATH101', name: "Linear Algebra" },
+    { id: 2, code: 'CS102', name: "Computer Science" },
+    { id: 3, code: 'DESIGN201', name: "Design Thinking" },
+    { id: 4, code: 'PHYS104', name: "Introduction to Physics" },
+    { id: 5, code: 'IOT205', name: "Internet of Things Systems" },
   ];
   const plans = [
     [

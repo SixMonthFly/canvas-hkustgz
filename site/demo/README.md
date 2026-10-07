@@ -35,33 +35,19 @@ the presentation-only sync overlay; it disables animation in scroll-tour mode.
 Dates are relative to the visitor's current day, so the sample calendar remains
 populated over time; they are not a real academic calendar.
 
-## Scroll-tour mode
+## Current website presentation (2026-10-07)
 
-The parent page advances through `sync`, `home`, `overview`, `assignments`,
-`announcements`, `files` and `analysis` as its chapter text passes through the
-viewport. Its inert iframe cannot capture pointer input or require a click to
-advance. Each scene uses the renderer's existing navigation and board controls,
-resets detail/filter/scroll state and cancels renderer animation. The parent fades
-the iframe out before sending a new scene and fades it back in after the
-`canvas-story-applied` acknowledgement. Reduced-motion settings make the switch
-instant. The sync overlay
-is a labelled illustration, not a real login or synchronization.
+The website uses ordinary page flow. Since 2026-10-08 its primary product surfaces use user-supplied actual Mac 4.1.2 PNG screenshots. The historical 0.3.6 browser renderer is an additional, explicitly labelled interactive experience. Each of its seven feature demonstrations
+has a fixed title, description and preview. Page scrolling does not change the
+hero iframe or send scene commands. Legacy `?story=1` bridge support is isolated
+and is not used by either language page.
 
-Only `?story=1` enables the message API. The child accepts
-`{ type: 'canvas-story', step: '<scene>' }` from its same-origin parent, validates
-the scene against the list above and retains a pending scene until rendering is
-ready. It responds with `canvas-story-ready` and `canvas-story-applied` messages.
-The parent validates the iframe source and origin and resends its current scene
-on iframe load. Serve over HTTP so both documents have a normal matching origin.
-The ordinary demo does not accept these scene messages. Both modes retain the
-mock API and blocked service controls; neither makes remote calls.
-
-The surrounding website uses Songti system fonts for headings and PingFang or
-other system sans-serif fonts for body copy. Its separate AI SVG shows a complete
-conversation from the moment it enters view: a question, an MCP lookup and a
-fictional answer. Three scroll chapters explain the interaction while the entire
-image stays visible, without clipping or a progressive reveal; it does not call AI.
-These website changes are currently local preview work pending publication.
+The full interactive demo opens in a native dialog. The website demo stylesheet
+adds narrow-viewport layouts for course navigation, calendar and focused boards.
+These presentation changes do not change the desktop client or its packages.
+Demo course codes are MATH101, CS102, DESIGN201, PHYS104 and IOT205; the course,
+assignment and report fixtures remain fictional. The demo data label lives in
+normal layout flow, rather than a corner overlay.
 
 The bundled Source Serif 4 font remains under its included SIL Open Font License.
 The marked vendor bundle and the renderer preserve their source notices.

@@ -1,17 +1,10 @@
 /* Presentation-only additions; the product layout and theme are copied as-is. */
 html, body { min-width: 720px; }
 .demo-label {
-  position: fixed;
-  z-index: 20;
-  bottom: 10px;
-  right: 14px;
-  padding: 5px 9px;
-  border: 1px solid rgba(94, 111, 140, .2);
-  border-radius: 5px;
-  background: rgba(247, 249, 253, .94);
-  color: #53617b;
-  font: 10px/1.4 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
-  pointer-events: none;
+  position:static;flex:none;order:3;text-align:center;
+  padding:6px 14px;border-top:1px solid var(--border);
+  background:var(--panel);color:var(--text-dim);
+  font:11px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
 }
 #toast { max-width: min(540px, calc(100vw - 40px)); white-space: normal; text-align: center; }
 
@@ -118,4 +111,27 @@ html[data-story-mode="true"] .story-sync-card small { color: #8a959b; font-size:
  html[data-story-mode=true] .row:nth-child(5){animation-delay:.24s}
  html[data-story-mode=true] .board[data-board]{transition:transform .65s cubic-bezier(.16,1,.3,1),opacity .55s}
  @keyframes demo-row-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+/* Website demo only: a narrow viewport remains usable without horizontal scroll. */
+@media(max-width:640px){
+ html,body{min-width:0;width:100%;overflow-x:hidden}
+ body{height:100dvh}body>header{flex-wrap:wrap;height:auto;min-height:74px;gap:6px;padding:10px 12px}
+ #app-title{font-size:14px;max-width:100%;overflow-wrap:anywhere}.synced{font-size:10px}
+ body>header button{min-height:36px;padding:6px 10px}
+ #app{flex-direction:column;overflow:hidden}#course-nav{width:100%;flex:none;border-right:0;border-bottom:1px solid var(--border);padding:8px;max-height:135px;overflow:auto}
+ #nav-items{display:flex;flex-wrap:wrap;gap:5px}.nav-item{padding:6px 9px;margin:0;min-height:36px;font-size:11px;max-width:100%;border:1px solid var(--border)}.nav-item .count{font-size:10px}
+ #update-footer{display:none}main{min-height:0}#stage{padding:10px;gap:10px;overflow:auto}
+ #stage[data-mode=overview]{grid-template-columns:1fr;grid-template-rows:none;display:flex;flex-direction:column;overflow:auto}
+ #stage[data-mode=overview] .board{min-height:235px;flex-shrink:0}
+ #stage[data-mode=focus]{display:flex;flex-direction:column;overflow:auto}
+ #stage[data-mode=focus] .board:not(.is-focus){display:none}
+ #stage[data-mode=focus] .board.is-focus{min-height:380px;flex:1}
+ #stage-strip-head{flex:none}#stage-overview-btn{width:auto;min-height:36px}
+ .hn{grid-template-columns:1fr;gap:10px;padding:14px}.hn-count{font-size:27px}.hn-title{white-space:normal;line-height:1.6}.hn-course,.hn-due{margin-left:0;font-size:11px;display:block}
+ .cal-head{flex-wrap:wrap}.cal-range{font-size:10px}.cal-grid{grid-template-rows:auto repeat(var(--rows),minmax(80px,1fr));min-height:470px}.cal-wd{padding:6px 3px;font-size:10px}.cal-day{padding:4px 2px}.cal-item{padding:2px;font-size:9px;border-left-width:2px}.cal-more{font-size:9px}
+ #home-view{overflow-y:auto;min-height:0}.board-head{padding:10px 12px}.board-meta{font-size:10px}
+ #detail-panel,#detail-panel:not(.hidden){min-width:0;width:calc(100vw - 16px);inset:8px 8px 8px auto;z-index:30}#detail-panel::before{width:8px}
+ .detail-actions{flex-wrap:wrap}.detail-actions button{min-height:36px}.row .title{white-space:normal;overflow-wrap:anywhere}
+ .modal-body{width:calc(100vw - 20px);max-width:none;padding:18px;max-height:calc(100dvh - 20px);overflow:auto}
+ .g-table{table-layout:fixed}.g-table td,.g-table th{overflow-wrap:anywhere}.demo-label{position:static;flex:none;align-self:stretch;text-align:center;border-radius:0;padding:5px 10px;font-size:11px}
 }

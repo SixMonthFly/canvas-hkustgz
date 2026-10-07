@@ -20,7 +20,6 @@ const platforms = {
     helpId: 'windows-install', helpLabel: L.t('Windows 安装说明 ↗'),
   },
 };
-const heroDemo = document.querySelector('#hero-demo');
 const dialog = document.querySelector('#preview-dialog');
 const largeDemo = document.querySelector('#large-demo');
 const toast = document.querySelector('#toast');
@@ -31,28 +30,13 @@ function notify(message) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove('visible'), 5000);
 }
-function fitDemo() {
-  const width = document.querySelector('.demo-viewport').clientWidth;
-  heroDemo.style.setProperty('--demo-scale', String(width / 1180));
-}
-new ResizeObserver(fitDemo).observe(document.querySelector('.demo-viewport'));
-fitDemo();
-document.querySelectorAll('[data-preview]').forEach(button => button.addEventListener('click', () => {
-  currentPreview = button.dataset.preview;
-  heroDemo.src = previewPaths[currentPreview];
-  document.querySelectorAll('[data-preview]').forEach(item => {
-    const active = item === button;
-    item.classList.toggle('active', active);
-    item.setAttribute('aria-pressed', String(active));
-  });
-}));
 document.querySelectorAll('[data-open-preview]').forEach(button => button.addEventListener('click', () => {
   largeDemo.src = previewPaths[currentPreview];
   dialog.showModal();
   document.body.style.overflow = 'hidden';
 }));
-document.querySelector('#close-preview').addEventListener('click', () => dialog.close());
-dialog.addEventListener('close', () => { document.body.style.overflow = ''; largeDemo.removeAttribute('src'); });
+document.querySelector('#close-preview').addEventListener('click', () => { dialog.close(); syncModalScroll(); });
+dialog.addEventListener('close', () => { syncModalScroll(); largeDemo.removeAttribute('src'); });
 dialog.addEventListener('click', event => {
   const rect = dialog.getBoundingClientRect();
   if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
@@ -60,13 +44,6 @@ dialog.addEventListener('click', event => {
 document.querySelectorAll('[data-expand]').forEach(link => link.addEventListener('click', () => {
   document.getElementById(link.dataset.expand).open = true;
 }));
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-  document.documentElement.classList.add('motion');
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  }), { threshold: .08 });
-  document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
-}
 function selectedPackage() {
   if (release?.packages && typeof release.packages === 'object') {
     return release.packages[selectedPlatform] || null;
@@ -181,48 +158,163 @@ function renderDockDownloads() {
 renderDockDownloads();
 
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
-const product = document.querySelector('.product-window');
-const heroSection = document.querySelector('.hero');
+// Scrolling only updates Dock elevation. It never drives a scene or text motion.
 let motionFrame = 0;
-function updateScrollMotion() {
+function updateDock() {
   motionFrame = 0;
   dock.classList.toggle('is-scrolled', scrollY > 24);
-  if (motionPreference.matches) return;
-  const rect = heroSection.getBoundingClientRect();
-  if (rect.bottom > 0 && rect.top < innerHeight) {
-    const progress = Math.min(1, Math.max(0, scrollY / (innerHeight * .85)));
-    product.style.setProperty('--hero-tilt', (5 * (1 - progress)) + 'deg');
-    product.style.setProperty('--hero-scale', String(.98 + .02 * progress));
-    product.style.setProperty('--hero-lift', (-14 * progress) + 'px');
-  }
 }
-window.addEventListener('scroll', () => { if (!motionFrame) motionFrame = requestAnimationFrame(updateScrollMotion); }, {passive:true});
-motionPreference.addEventListener('change', () => { product.removeAttribute('style'); updateScrollMotion(); });
-document.querySelectorAll('.school-list li').forEach((item,index) => item.style.setProperty('--school-index', String(index)));
-if ('IntersectionObserver' in window) {
-  const entrance = new IntersectionObserver(entries => {
-    for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('visible'); entrance.unobserve(entry.target); }
-  }, {threshold:.12});
-  document.querySelectorAll('.school-list,.schools-heading,.widget-section>div,.widget-section figure,.gallery-intro,.ai-intro,.feature-tile,.motion-card,.mcp-showcase').forEach(el => {
-    if (!el.classList.contains('school-list')) el.classList.add('reveal');
-    entrance.observe(el);
-  });
-}
-updateScrollMotion();
+window.addEventListener('scroll', () => {
+  if (!motionFrame) motionFrame = requestAnimationFrame(updateDock);
+}, { passive: true });
+updateDock();
 
 const previewCards = [...document.querySelectorAll('.motion-card,[data-motion-preview]')];
-for (const card of previewCards) {
-  const button = card.querySelector('.preview-pause');
-  button.addEventListener('click', () => {
-    const paused = card.classList.toggle('is-paused');
+function updatePlayback() {
+  for (const card of previewCards) {
+    const active = card.dataset.inView === 'true' && !document.hidden && !motionPreference.matches;
+    card.classList.toggle('is-playing', active);
+    const button = card.querySelector('.preview-pause');
+    const paused = card.classList.contains('is-paused');
     button.setAttribute('aria-pressed', String(paused));
-    button.setAttribute('aria-label', document.documentElement.lang === 'en' ? (paused ? 'Play animation' : 'Pause animation') : (paused ? '播放动画' : '暂停动画'));
+    button.disabled = motionPreference.matches;
+    button.setAttribute('aria-label', L.english
+      ? (motionPreference.matches ? 'Animation disabled by reduced-motion preference' : paused ? 'Play animation' : 'Pause animation')
+      : (motionPreference.matches ? '已按减少动态偏好停止动画' : paused ? '播放动画' : '暂停动画'));
     button.textContent = paused ? '▷' : 'Ⅱ';
+  }
+}
+for (const card of previewCards) {
+  card.querySelector('.preview-pause').addEventListener('click', () => {
+    card.classList.toggle('is-paused');
+    updatePlayback();
   });
 }
 if ('IntersectionObserver' in window) {
   const previews = new IntersectionObserver(entries => {
-    for (const entry of entries) entry.target.classList.toggle('is-playing', entry.isIntersecting);
-  }, { threshold: .15 });
+    for (const entry of entries) entry.target.dataset.inView = String(entry.isIntersecting);
+    updatePlayback();
+  }, { threshold: .12 });
   previewCards.forEach(card => previews.observe(card));
-} else { previewCards.forEach(card => card.classList.add('is-playing')); }
+} else {
+  previewCards.forEach(card => card.dataset.inView = 'true');
+}
+motionPreference.addEventListener('change', updatePlayback);
+document.addEventListener('visibilitychange', updatePlayback);
+updatePlayback();
+
+// Match navigation across both static language pages, with a best-effort platform preference.
+try {
+  const saved = localStorage.getItem('canvas-site:platform');
+  if (platforms[saved]) { selectedPlatform = saved; renderPlatform(); }
+} catch (_) {}
+document.querySelectorAll('[data-platform]').forEach(button => button.addEventListener('click', () => {
+  try { localStorage.setItem('canvas-site:platform', selectedPlatform); } catch (_) {}
+}));
+document.querySelector('.language-link').addEventListener('click', event => {
+  const allowed = new Set(['#features','#schools','#widgets','#ai','#faq','#download']);
+  if (allowed.has(location.hash)) {
+    const target = new URL(event.currentTarget.href);
+    target.hash = location.hash;
+    event.currentTarget.href = target.href;
+  }
+});
+
+// Autonomous timelines belong to their own previews, never to page scroll.
+const loopCopy = L.english ? {
+ 'story-sync': ['Reading Canvas courses…', 'Organizing assignments…', 'Saving course files locally…', '3 demo courses synced'],
+ 'story-home': ['Upcoming deadlines, across courses', 'Oct 12 · Problem set 02', 'Oct 16 · Reading response', 'Oct 24 · Project proposal'],
+ 'story-overview': ['One course, three boards', 'Assignments and due dates', 'Latest course announcements', 'Files for your next class'],
+ 'story-assignments': ['Select an assignment', 'Read the requirements', 'Optional AI · break down the work', 'Start with the first step'],
+ 'story-announcements': ['Latest announcements first', 'New practice exercises', 'Class schedule updated', 'Project materials available'],
+ 'story-files': ['Download selected course files', 'Lecture 05.pdf saved', 'Reading notes.pdf saved', '3 demo files saved locally'],
+ 'story-analysis': ['Optional AI · reviewing materials', 'Course structure organized', 'Example grading breakdown', 'Study suggestions ready']
+} : {
+ 'story-sync': ['正在读取 Canvas 课程…', '整理作业与公告…', '在本机保存课程资料…', '3 门示例课程已同步'],
+ 'story-home': ['把各门课的截止放到一起', '10 月 12 日 · Problem set 02', '10 月 16 日 · Reading response', '10 月 24 日 · Project proposal'],
+ 'story-overview': ['一门课程，三块看板', '查看作业与截止日期', '阅读最新课程公告', '找到下一课的资料'],
+ 'story-assignments': ['选择下一份作业', '看清要求和截止时间', '可选 AI · 梳理完成思路', '从第一步开始'],
+ 'story-announcements': ['按时间整理新消息', '本周练习已更新', '课堂安排有新消息', '项目资料已放入课件'],
+ 'story-files': ['下载选中的课程资料', 'Lecture 05.pdf 已保存', 'Reading notes.pdf 已保存', '3 份示例资料已保存在本机'],
+ 'story-analysis': ['可选 AI · 阅读课程资料', '整理课程结构', '梳理示例评分构成', '学习建议已生成']
+};
+const timelines = previewCards.filter(card => loopCopy[card.id] && card.querySelector('.preview-state')).map(card => ({card, elapsed:0, phase:-1}));
+function paintTimeline(item, phase) {
+ item.phase = phase;
+ item.card.dataset.phase = String(phase);
+ item.card.querySelector('.preview-state').textContent = loopCopy[item.card.id][phase];
+ if (item.card.id === 'story-sync') item.card.querySelector('.sync-line span:last-child').textContent = `${Math.min(phase,3)} / 3`;
+ if (item.card.id === 'story-files') item.card.querySelectorAll('.file-done').forEach((mark,i)=>mark.textContent=phase>i?'✓':'↓');
+}
+timelines.forEach(item=>paintTimeline(item, motionPreference.matches ? 3 : 0));
+let lastTick = performance.now();
+setInterval(()=>{
+ const now = performance.now();const delta = Math.min(now-lastTick,250);lastTick=now;
+ for(const item of timelines){
+  if(motionPreference.matches){if(item.phase!==3)paintTimeline(item,3);continue;}
+  if(!item.card.classList.contains('is-playing') || item.card.classList.contains('is-paused') || item.card.matches(':hover,:focus-within'))continue;
+  item.elapsed=(item.elapsed+delta)%16000;
+  const phase=Math.floor(item.elapsed/4000);
+  if(phase!==item.phase)paintTimeline(item,phase);
+ }
+},200);
+
+// The release panel owns the solid download CTA when it is in view.
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(entries => {
+    dock.classList.toggle('at-download', entries[0].isIntersecting);
+  }, { threshold: .08 }).observe(document.querySelector('#download'));
+}
+
+// A separate screenshot reader. Full frames remain unchanged; zoom affects only this dialog.
+const imageDialog = document.querySelector('#image-dialog');
+const imageFull = document.querySelector('#image-full');
+const imageZoom = document.querySelector('#image-zoom');
+function resetImageZoom() {
+ imageDialog.classList.remove('is-zoomed');
+ imageZoom.setAttribute('aria-pressed','false');
+ imageZoom.textContent = L.english ? 'Zoom in' : '放大阅读';
+ const area=imageDialog.querySelector('.image-scroll');area.scrollTop=0;area.scrollLeft=0;
+}
+document.querySelectorAll('[data-image-open]').forEach(button=>button.addEventListener('click',()=>{
+ imageFull.src=button.dataset.imageOpen;
+ imageFull.alt=button.dataset.imageTitle + (L.english ? ' — actual Mac 4.1.2 screenshot with fictional courses' : ' — Mac 4.1.2 实际截屏，虚构课程');
+ document.querySelector('#image-title').textContent=button.dataset.imageTitle;
+ document.querySelector('#image-original').href=button.dataset.imageOriginal;
+ resetImageZoom();imageDialog.showModal();document.body.style.overflow='hidden';
+}));
+imageZoom.addEventListener('click',()=>{
+ const zoomed=imageDialog.classList.toggle('is-zoomed');
+ imageZoom.setAttribute('aria-pressed',String(zoomed));
+ imageZoom.textContent= L.english ? (zoomed?'Fit image':'Zoom in') : (zoomed?'适应窗口':'放大阅读');
+ if(!zoomed) resetImageZoom();
+});
+function syncModalScroll(){document.body.style.overflow=dialog.open||imageDialog.open?'hidden':'';}
+document.querySelector('#image-close').addEventListener('click',()=>{imageDialog.close();syncModalScroll();});
+imageDialog.addEventListener('close',()=>{syncModalScroll();resetImageZoom();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&imageDialog.open){event.preventDefault();imageDialog.close();syncModalScroll();}});
+imageDialog.addEventListener('click',e=>{if(e.target===imageDialog){const r=imageDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)imageDialog.close();}});
+
+// Independent, slow actual-state tour; page scroll only controls whether its clock runs.
+const captureTour=document.querySelector('[data-capture-tour]');
+const shotOrder=['overview','assignments','announcements','files'];
+let shotElapsed=0,shotIndex=0,shotCycles=0;
+const shotLabels=L.english?['Overview','Assignments','Announcements','Course files']:['总览','作业详情','公告详情','课件列表'];
+function selectShot(index){
+ shotIndex=index;
+ captureTour.querySelectorAll('[data-shot]').forEach(frame=>{const active=frame.dataset.shot===shotOrder[index];frame.hidden=!active;frame.setAttribute('aria-hidden',String(!active));});
+ captureTour.querySelectorAll('[data-capture-select]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.captureSelect===shotOrder[index])));
+ captureTour.querySelector('.tour-status').textContent=shotLabels[index]+(L.english?' · Actual client screenshot':' · 实际客户端截屏');
+}
+captureTour.querySelectorAll('[data-capture-select]').forEach(b=>b.addEventListener('click',()=>{
+ shotElapsed=0;shotCycles=0;selectShot(shotOrder.indexOf(b.dataset.captureSelect));
+ captureTour.classList.add('is-paused');updatePlayback();
+}));
+captureTour.querySelector('.preview-pause').addEventListener('click',()=>{shotCycles=0;shotElapsed=0;});
+let captureTick=performance.now();
+setInterval(()=>{
+ const now=performance.now(),delta=Math.min(now-captureTick,300);captureTick=now;
+ if(motionPreference.matches||document.hidden||imageDialog.open||dialog.open||!captureTour.classList.contains('is-playing')||captureTour.classList.contains('is-paused')||captureTour.matches(':hover,:focus-within'))return;
+ shotElapsed+=delta;
+ if(shotElapsed>=10000){shotElapsed=0;const next=(shotIndex+1)%shotOrder.length;selectShot(next);if(next===0 && ++shotCycles>=3){captureTour.classList.add('is-paused');updatePlayback();}}
+},200);

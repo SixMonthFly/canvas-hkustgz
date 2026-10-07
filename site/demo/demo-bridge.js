@@ -27,11 +27,11 @@
   };
 
   const demoCourses = [
-    { id: 1, code: 'ROAS5120 (L01)', name: '形式化验证与控制 · Formal Verification and Control' },
-    { id: 2, code: 'DSAA5001 (L01)', name: '数据科学基础 · Foundations of Data Science' },
-    { id: 3, code: 'PLED5001 (T01)', name: '学术英语交流 · Communicating Research in English' },
-    { id: 4, code: 'AIAA5001 (L01)', name: '人工智能导论 · Introduction to Artificial Intelligence' },
-    { id: 5, code: 'IOTA5002 (L01)', name: '物联网系统 · Internet of Things Systems' },
+    { id: 1, code: 'MATH101', name: '线性代数 · Linear Algebra' },
+    { id: 2, code: 'CS102', name: '计算机科学 · Computer Science' },
+    { id: 3, code: 'DESIGN201', name: '设计思维 · Design Thinking' },
+    { id: 4, code: 'PHYS104', name: '物理学基础 · Introduction to Physics' },
+    { id: 5, code: 'IOT205', name: '物联网系统 · Internet of Things Systems' },
   ];
   const plans = [
     [
