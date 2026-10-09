@@ -1,8 +1,22 @@
 # Canvas Manager · Canvas 课程管理
 
-让每一课，都有条理。完全免费、开源的 Canvas 桌面工具，通过学校开放的 Canvas API 同步课程、作业、公告和课件；课程缓存、设置与下载文件保存在本机。
+批量下载课件，集中查看作业和公告，用一个日历查看课程截止日期。完全免费、开源的 Canvas 桌面工具，通过学校开放的 Canvas API 同步课程、作业、公告和课件；课程缓存、设置与下载文件保存在本机。
 
 [中文官网](https://sixmonthfly.github.io/canvas-hkustgz/) · [English website](https://sixmonthfly.github.io/canvas-hkustgz/en/) · [下载 4.1.2](https://github.com/SixMonthFly/canvas-hkustgz/releases/tag/v4.1.2) · [应用源码](https://gitee.com/xxouyang123/hkustgz_diy_canvas)
+
+## 产品资料与视频取材 / Product documentation and video materials
+
+资料更新 **2026-10-09**，对应公开客户端 **4.1.2**。学校预设不等于逐校账号验收；此处是详细文档同步，不是新安装包发布。
+
+- **[中文完整使用说明](docs/PRODUCT-GUIDE.zh-CN.md)**：支持什么样的学校、11 校完整入口表、安装、首次启动、登录同步、作业 / 公告 / 批量下载、切校与插件。
+- **[English product and usage guide](docs/PRODUCT-GUIDE.en.md)**: compatibility, installation, first launch, daily usage, optional plugins and data handling.
+- **[宣传视频取材稿](docs/VIDEO-BRIEF.zh-CN.md)**：直白功能文案、建议分镜、真实客户端图片与素材类型、可宣传的能力和限制。
+- **[近期客户端工作与验证](docs/RELEASE-NOTES.md)**：4.0 → 4.1.2 的插件、多校、双语、图标与指引修正，区分测试 / 打包 / 本机 / 公开发布。
+- **供 Agent 直接读取**：[产品事实 JSON](docs/product-facts.json)、[学校 JSON](docs/schools.json)、[截图清单 JSON](docs/screenshots.json)。
+
+真实界面 PNG 已在 `site/assets/product/`，中英文各 5 张。来源为实际 Mac 4.1.2 打包客户端，使用隔离的虚构课程；可以说明界面，不是在线同步、下载或全部学校登录的实测证据。浏览器交互演示仍是历史 0.3.6。
+
+This documentation pack includes current app work, practical instructions, 11 school presets, a video brief and machine-readable facts. Use the actual packaged-client PNGs, with fictional-data labels. Full-installer updates remain the current client update method.
 
 ## 4.1.2 · 多校、双语与使用指引
 
@@ -45,9 +59,9 @@ Canvas Manager is a completely free, open-source project that uses school Canvas
 
 This repository contains the public website, fictional-data demo and release assets. App source is hosted on Gitee. This independent tool is not affiliated with any university or Instructure Canvas.
 
-官网功能现以独立卡片直接铺开，支持同步进度、月历高亮、下载进度、分析路径、MCP 对话和插件/API 内容自动滚动；动效可暂停并遵循系统减弱动态设置。中英文页面同步维护。
+官网以普通页面流展示真实客户端截图，另有说明性 AI / MCP / 小组件插画和自动滚动的插件 / API 卡片；动效可暂停并遵循系统减弱动态设置。中英文页面同步维护，首屏标题已修正居中。说明性插画不等于客户端操作录像。
 
-Features are presented in a normal-flow gallery with animated sync, calendar, file download, analysis and MCP previews. Animations can be paused and respect reduced-motion preferences.
+Features are presented in a normal-flow gallery with actual-client screenshots and separately labeled illustrations. Plugin/API cards include automatic scrolling. Animations can be paused and respect reduced-motion preferences.
 
 官网排版与动效参考 [DeepSeek Harness](https://www.deepseek.com/en/harness/)，未使用其品牌素材。网页演示不连接学校账号、Canvas 或 AI 服务。
 

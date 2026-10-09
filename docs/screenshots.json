@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-09",
+  "clientVersion": "4.1.2",
+  "platform": "macOS Apple Silicon",
+  "appearance": "default",
+  "selectedSchool": "hkust-gz",
+  "data": "isolated fictional courses; no user course data",
+  "captureMethod": "native screenshots from an unmodified packaged client copy",
+  "packagedAppAsarSHA256": "3ab53ae29f8a68ff3db212e7c0b2081560b5d37ebe3e4b852612bc006d1eb77c",
+  "captureCopyMatchesInstalledApp": true,
+  "assets": [
+    {
+      "scene": "announcements",
+      "language": "en",
+      "title": "Expanded announcement",
+      "repositoryPath": "site/assets/product/announcements-en.png",
+      "pathFromThisDocument": "../site/assets/product/announcements-en.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/announcements-en.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/announcements-en.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 259048,
+      "sha256": "e16311725b95370aca7d089ee833f6cefc8900a7fa5ec12c79e92630d2130e58",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "announcements",
+      "language": "zh-CN",
+      "title": "公告详情",
+      "repositoryPath": "site/assets/product/announcements-zh.png",
+      "pathFromThisDocument": "../site/assets/product/announcements-zh.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/announcements-zh.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/announcements-zh.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 247799,
+      "sha256": "3ac971506a5a5761d58d364260275548004953515a9bfde5eedd542ec6600bcc",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "assignments",
+      "language": "en",
+      "title": "Assignment details",
+      "repositoryPath": "site/assets/product/assignments-en.png",
+      "pathFromThisDocument": "../site/assets/product/assignments-en.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/assignments-en.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/assignments-en.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 383834,
+      "sha256": "a63be5f548af6b36073421992cd90d3cf9a1c073391f5df40c4cb5da8c40d593",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "assignments",
+      "language": "zh-CN",
+      "title": "作业详情",
+      "repositoryPath": "site/assets/product/assignments-zh.png",
+      "pathFromThisDocument": "../site/assets/product/assignments-zh.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/assignments-zh.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/assignments-zh.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 353806,
+      "sha256": "81e477e2b6243f5d001aa417f90ba27c0e5a611c2968ecc88235d1231e35bb1e",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "files",
+      "language": "en",
+      "title": "Course files and download controls",
+      "repositoryPath": "site/assets/product/files-en.png",
+      "pathFromThisDocument": "../site/assets/product/files-en.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/files-en.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/files-en.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 267210,
+      "sha256": "f0c75a92c61ab211c0fcfbee5c79c5006e1b4befebdf2e43a5d81b35601f0ece",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "files",
+      "language": "zh-CN",
+      "title": "课件列表与下载入口",
+      "repositoryPath": "site/assets/product/files-zh.png",
+      "pathFromThisDocument": "../site/assets/product/files-zh.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/files-zh.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/files-zh.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 247565,
+      "sha256": "4d5060187a576d8bcceba4481d57f86f2dbf3368f5a57adf11240987e6715cb6",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "home",
+      "language": "en",
+      "title": "All courses and 30-day calendar",
+      "repositoryPath": "site/assets/product/home-en.png",
+      "pathFromThisDocument": "../site/assets/product/home-en.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/home-en.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/home-en.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 289411,
+      "sha256": "f2a287e56d2c5e5e99c717387f20bcf784a75cc7c34f2e7b21f2b8921fa88193",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "home",
+      "language": "zh-CN",
+      "title": "全部课程与30天日历",
+      "repositoryPath": "site/assets/product/home-zh.png",
+      "pathFromThisDocument": "../site/assets/product/home-zh.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/home-zh.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/home-zh.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 292961,
+      "sha256": "d21800b1c38699272a507c04658310e5adaeccfe7e0de115659f28e4073f8787",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "overview",
+      "language": "en",
+      "title": "Course overview",
+      "repositoryPath": "site/assets/product/overview-en.png",
+      "pathFromThisDocument": "../site/assets/product/overview-en.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/overview-en.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/overview-en.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 309393,
+      "sha256": "f413b9771f88ce3829cf4b518b3c8661b0d483124ae163b855fabe4b89bc264f",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    },
+    {
+      "scene": "overview",
+      "language": "zh-CN",
+      "title": "课程总览",
+      "repositoryPath": "site/assets/product/overview-zh.png",
+      "pathFromThisDocument": "../site/assets/product/overview-zh.png",
+      "publicUrl": "https://sixmonthfly.github.io/canvas-hkustgz/assets/product/overview-zh.png",
+      "rawGitHubUrl": "https://raw.githubusercontent.com/SixMonthFly/canvas-hkustgz/main/site/assets/product/overview-zh.png",
+      "width": 4718592,
+      "height": 4292935744,
+      "size": 290020,
+      "sha256": "5198e702b39b18ed5cd40e7bfbec7d797445c97b8a9989765109138dcd8fe16a",
+      "mediaType": "actual_packaged_client_screenshot_with_fictional_data",
+      "proves": "UI appearance in this captured state only",
+      "doesNotProve": [
+        "real school authentication",
+        "live sync success",
+        "download success",
+        "AI provider response"
+      ]
+    }
+  ],
+  "notProvided": [
+    "first-launch recording",
+    "school SSO/MFA recording",
+    "live sync recording",
+    "live file-download recording",
+    "language-switch interaction recording",
+    "AI-provider response recording",
+    "native WidgetKit recording"
+  ],
+  "illustrationsAreNotScreenshots": [
+    "site/assets/ai-homework.svg",
+    "site/assets/ai-homework-en.svg",
+    "site/assets/widget-preview.svg",
+    "site/assets/widget-preview-en.svg"
+  ],
+  "browserDemoVersion": "0.3.6"
+}

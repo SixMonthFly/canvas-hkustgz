@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-09",
+  "product": {
+    "name": "Canvas Manager",
+    "nameZh": "Canvas 课程管理",
+    "version": "4.1.2",
+    "releasedAt": "2026-10-07",
+    "license": "MIT (application package metadata)",
+    "free": true,
+    "affiliation": "independent; not affiliated with universities or Instructure Canvas",
+    "descriptionZh": "批量下载课件，集中查看作业和公告，用一个日历查看课程截止日期。",
+    "descriptionEn": "Download course files in bulk. View assignments and announcements. Track course deadlines in one calendar."
+  },
+  "links": {
+    "websiteZh": "https://sixmonthfly.github.io/canvas-hkustgz/",
+    "websiteEn": "https://sixmonthfly.github.io/canvas-hkustgz/en/",
+    "release": "https://github.com/SixMonthFly/canvas-hkustgz/releases/tag/v4.1.2",
+    "appSource": "https://gitee.com/xxouyang123/hkustgz_diy_canvas",
+    "publicRepository": "https://github.com/SixMonthFly/canvas-hkustgz"
+  },
+  "schoolCompatibility": {
+    "presetsFile": "schools.json",
+    "count": 11,
+    "continents": [
+      "Africa",
+      "Asia",
+      "Europe",
+      "North America",
+      "Oceania",
+      "South America"
+    ],
+    "requirements": [
+      "Canvas LMS",
+      "listed preset",
+      "valid school account",
+      "SSO/MFA compatible with client window",
+      "sufficient API and download permissions",
+      "school-required network access"
+    ],
+    "customSchoolUrl": false,
+    "allSchoolsAccountTested": false,
+    "nusEvidence": "user report only",
+    "sameSchoolMultiAccountUI": false,
+    "crossSchoolCombinedCalendar": false
+  },
+  "features": [
+    {
+      "id": "courses",
+      "labelZh": "同步课程",
+      "labelEn": "Sync courses",
+      "optional": false
+    },
+    {
+      "id": "calendar",
+      "labelZh": "未来30天截止日历",
+      "labelEn": "30-day deadline calendar",
+      "optional": false,
+      "source": "latest synchronized local cache"
+    },
+    {
+      "id": "assignments",
+      "labelZh": "集中查看作业与要求",
+      "labelEn": "View assignments and requirements",
+      "optional": false,
+      "automaticSubmission": false
+    },
+    {
+      "id": "announcements",
+      "labelZh": "阅读课程公告",
+      "labelEn": "Read course announcements",
+      "optional": false
+    },
+    {
+      "id": "files",
+      "labelZh": "批量下载课件",
+      "labelEn": "Bulk course-file downloads",
+      "optional": false,
+      "scope": "current visible file list; school permissions apply"
+    },
+    {
+      "id": "bilingual",
+      "labelZh": "中英文界面",
+      "labelEn": "Chinese/English UI",
+      "optional": false,
+      "doesNotTranslateCourseText": true
+    },
+    {
+      "id": "onboarding",
+      "labelZh": "首次启动与续接指引",
+      "labelEn": "Resumable first-launch guide",
+      "states": [
+        "pending",
+        "completed",
+        "skipped"
+      ],
+      "closeMeansSkip": false,
+      "practicalStep": "non-modal with direct sign-in/sync button"
+    },
+    {
+      "id": "reminders",
+      "labelZh": "截止提醒",
+      "labelEn": "Deadline notifications",
+      "requiresRunningClient": true,
+      "thresholdHours": [
+        24,
+        1
+      ],
+      "dependsOnOSNotifications": true
+    },
+    {
+      "id": "ai",
+      "labelZh": "AI助手",
+      "labelEn": "AI assistant",
+      "optional": true,
+      "enabledByDefault": false,
+      "providerMayCharge": true,
+      "relevantMaterialSentToConfiguredProvider": true
+    },
+    {
+      "id": "widgets",
+      "labelZh": "Mac原生小组件",
+      "labelEn": "Native Mac widgets",
+      "optional": true,
+      "enabledByDefault": false,
+      "minimumMacOS": "14",
+      "windowHours": 168,
+      "refreshScheduler": "macOS WidgetKit",
+      "usesLatestLocalSnapshot": true
+    },
+    {
+      "id": "mcp",
+      "labelZh": "独立MCP服务",
+      "labelEn": "Separate MCP service",
+      "optional": true,
+      "requiresSeparateSetup": true,
+      "updatesWithApp": false
+    },
+    {
+      "id": "themes",
+      "labelZh": "按需安装皮肤",
+      "labelEn": "Install themes on demand",
+      "defaultInstalled": false,
+      "existingInstallationsRetained": true
+    }
+  ],
+  "updates": {
+    "currentMode": "full installer download",
+    "signedCodePackageUpdaterImplemented": false,
+    "automaticRollbackImplemented": false,
+    "websiteAndClientIndependent": true,
+    "onlinePluginMarketplace": false,
+    "pluginReinstallSource": "bundled copy"
+  },
+  "privacy": {
+    "courseCache": "local",
+    "downloads": "local by school and course",
+    "schoolSessions": "isolated local Electron partitions",
+    "diagnostics": "local only, no automatic upload, can disable/export",
+    "networkNeededFor": [
+      "school sign-in",
+      "Canvas sync",
+      "file downloads",
+      "GitHub update metadata",
+      "optional AI provider"
+    ],
+    "entirelyOffline": false
+  },
+  "releaseEvidence": {
+    "recordDate": "2026-10-07",
+    "rerunDuringThisDocumentationTask": false,
+    "nodeTestsPassed": 80,
+    "packagedOnboardingRestartPhasesPassed": 9,
+    "sourceFilesEqualBothPackages": 46,
+    "macSignatureVerified": true,
+    "macNotarized": false,
+    "windowsPayloadVerified": true,
+    "windowsSigned": false,
+    "windowsRuntimeTested": false,
+    "anonymousDownloadsVerifiedAtRelease": true,
+    "latestReleaseAssetMetadataRechecked": "2026-10-09"
+  },
+  "packages": [
+    {
+      "platform": "mac",
+      "version": "4.1.2",
+      "filename": "CanvasManager-4.1.2-mac-arm64.dmg",
+      "size": 142608659,
+      "sha256": "03416d8ec339ed5b7b70273728688f9c870cd0c6c23f3491389baf8b7b44a269",
+      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v4.1.2/CanvasManager-4.1.2-mac-arm64.dmg",
+      "minimumOS": "macOS 13",
+      "arch": "arm64",
+      "packageType": "DMG"
+    },
+    {
+      "platform": "windows",
+      "version": "4.1.2",
+      "filename": "CanvasManager-Setup-4.1.2-x64.exe",
+      "size": 122282013,
+      "sha256": "82c8f60b2d35141a092235907195e89a1548e69f0eff1dbe366f6a5df827e002",
+      "url": "https://github.com/SixMonthFly/canvas-hkustgz/releases/download/v4.1.2/CanvasManager-Setup-4.1.2-x64.exe",
+      "minimumOS": "Windows 10/11",
+      "arch": "x64",
+      "packageType": "EXE"
+    }
+  ],
+  "mediaFile": "screenshots.json",
+  "videoBrief": "VIDEO-BRIEF.zh-CN.md",
+  "doNotClaim": [
+    "all universities supported",
+    "all 11 schools account-tested",
+    "bypasses MFA or download restrictions",
+    "automatically submits assignments",
+    "guarantees grades or no missed deadlines",
+    "all AI free and offline",
+    "instant background sync while app fully exited",
+    "current signed hot updates",
+    "online plugin marketplace",
+    "Windows runtime acceptance completed",
+    "Mac Apple notarization completed",
+    "browser demo is the current client"
+  ]
+}
